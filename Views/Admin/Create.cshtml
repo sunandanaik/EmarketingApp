@@ -1,0 +1,48 @@
+﻿@model EmarketingApp.Models.tbl_category
+@{
+    ViewBag.Title = "Create Category";
+}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" />
+<link href="~/Content/styles.css?1422585377" rel="stylesheet" type="text/css" />
+
+<div class="login-body">
+    <div class="login-container">
+        @using (Html.BeginForm("Create","Admin",FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <div class="wrapper">
+                <div class="title"><span>Add Category</span></div>
+                <div class="cat-form">
+                    <div class="row">
+
+                        @Html.TextBoxFor(a => a.cat_name, new { @class = "form-control", @placeholder = "Enter Category" })
+
+                    </div>
+
+                    <div class="row">
+
+                        <input type="file" placeholder="Select Category Image" class="form-control" id="imgfile" name="imgfile" required />
+                        
+                    </div>
+                    <div class="row button">
+                        <input type="submit" value="Add" class="btn" />
+                    </div> 
+                    
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<script src="~/Scripts/jquery.validate-vsdoc.js"></script>
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+@section Scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
+

@@ -1,0 +1,56 @@
+﻿@model EmarketingApp.Models.tbl_admin
+@{
+    ViewBag.Title = "Login";
+    Layout = null;
+}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" />
+<link href="~/Content/styles.css?1422585377" rel="stylesheet" type="text/css" />
+
+<div class="login-body">
+    <div class="login-container">
+        @using (Html.BeginForm())
+        {
+            <div class="wrapper">
+                <div class="title"><span>Login Form</span></div>
+                <div class="form">
+                    <div class="row">
+                        <i class="fas fa-user"></i>
+                        @*<input type="text" placeholder="Email or Phone" required />*@
+                        @Html.TextBoxFor(a => a.ad_username, new { @class = "form-control", @placeholder = "Email or Phone"})
+                        
+                    </div>
+                    <span style="color:red;">@Html.ValidationMessageFor(a => a.ad_username)</span>
+                    <div class="row">
+                        <i class="fas fa-lock"></i>
+                        @*<input type="password" placeholder="Password" required />*@
+                        @Html.PasswordFor(a => a.ad_password, new { @class = "form-control", @placeholder = "Password"})
+
+                    </div>
+                    <span style="color:red;">@Html.ValidationMessageFor(a => a.ad_password)</span>
+
+                    <div class="pass"><a href="#">Forgot Password?</a></div>
+
+                    <div class="row button form-group">
+                        <input type="submit" value="Login" class="btn" />
+                    </div>
+                    @*<div class="signup-link">Not a member? <a href="#">SignUp Now</a></div>*@
+
+                    <div class="form-group">
+                        <p style="color:red;">@ViewBag.Error</p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<script src="~/Scripts/jquery.validate-vsdoc.js"></script>
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+@section Scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
