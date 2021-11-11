@@ -52,7 +52,7 @@ namespace EmarketingApp.Controllers
         [HttpPost]
         public ActionResult Create(tbl_category model,HttpPostedFileBase imgfile)
         {
-            string path = uploadingfile(imgfile); //function calling here
+            string path = Uploadingfile(imgfile); //function calling here
             if(path.Equals("-1"))
             {
                 ViewBag.Error = "Image Could not be Uploaded";
@@ -72,8 +72,8 @@ namespace EmarketingApp.Controllers
             return View();
         }
 
-        //Function to upload image
-        public string uploadingfile(HttpPostedFileBase file)
+        //Function to upload category image
+        public string Uploadingfile(HttpPostedFileBase file)
         {
             Random r = new Random();
             string path = "-1"; //bcoz function has string returntype.

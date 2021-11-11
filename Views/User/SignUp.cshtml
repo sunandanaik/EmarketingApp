@@ -1,0 +1,68 @@
+﻿@model EmarketingApp.Models.tbl_user
+@{
+    ViewBag.Title = "Create Category";
+}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" />
+<link href="~/Content/styles.css?1422585377" rel="stylesheet" type="text/css" />
+
+<div class="login-body">
+    <div class="login-container">
+        @using (Html.BeginForm("SignUp", "User", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <div class="wrapper">
+                <div class="title"><span>SignUp Form</span></div>
+                <div class="cat-form">
+                    <div class="row">
+
+                        @Html.TextBoxFor(a => a.u_name, new { @class = "form-control", @placeholder = "Enter Name" })
+
+                    </div>
+                    <span style="color:red;">@Html.ValidationMessageFor(a => a.u_name)</span>
+                    <div class="row">
+
+                        @Html.TextBoxFor(a => a.u_email, new { @class = "form-control", @placeholder = "Enter Email ID" })
+
+                    </div>
+                    <span style="color:red;">@Html.ValidationMessageFor(a => a.u_email)</span>
+
+                    <div class="row">
+
+                        @Html.PasswordFor(a => a.u_password, new { @class = "form-control", @placeholder = "Enter Password" })
+
+                    </div>
+                    <span style="color:red;">@Html.ValidationMessageFor(a => a.u_password)</span>
+                    <div class="row">
+
+                        @Html.TextBoxFor(a => a.u_contact, new { @class = "form-control", @placeholder = "Enter Contact No" })
+
+                    </div>
+                    <span style="color:red;">@Html.ValidationMessageFor(a => a.u_contact)</span>
+
+                    <div class="row">
+
+                        <input type="file" placeholder="Select Profile Image" class="form-control" id="imgfile" name="imgfile" required />
+
+                    </div>
+                    <div class="row button">
+                        <input type="submit" value="SignUp" class="btn" />
+                    </div>
+
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<script src="~/Scripts/jquery.validate-vsdoc.js"></script>
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+@section Scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
+

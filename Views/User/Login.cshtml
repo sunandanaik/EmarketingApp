@@ -1,0 +1,35 @@
+﻿@model EmarketingApp.Models.tbl_user
+@{
+    ViewBag.Title = "User Login";
+    Layout = null;
+}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" />
+<link href="~/Content/styles2.css" rel="stylesheet" type="text/css" />
+
+<div class="wrapper">
+    <div class="title">User Login</div>
+    @using (Html.BeginForm())
+    {
+        <div class="form">
+            <div class="field">
+                @Html.TextBoxFor(a => a.u_email, new { @class = "form-control",@required = "required" })
+                <label>Email Address</label>
+            </div>
+            <span style="color:red;">@Html.ValidationMessageFor(a => a.u_email)</span>
+            <div class="field">
+                @Html.PasswordFor(a => a.u_password, new { @class = "form-control", @required = "required" })
+                <label>Password</label>
+            </div>
+            <span style="color:red;">@Html.ValidationMessageFor(a => a.u_password)</span>
+
+            <div class="fpass"><a href="#">Forgot Password?</a></div>
+            <div class="field">
+                <input type="submit" value="Login" class="btn" />
+            </div>
+            <div class="signup-link">Not a member? <a href="/User/SignUp/">SignUp Now</a></div>
+            <div class="form-group">
+                <p style="color:red;">@ViewBag.Error</p>
+            </div>
+        </div>
+    }
+</div>
