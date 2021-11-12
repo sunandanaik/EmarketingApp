@@ -1,57 +1,54 @@
 ﻿@model EmarketingApp.Models.tbl_user
 @{
     ViewBag.Title = "Create Category";
+    Layout = null;
 }
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" />
-<link href="~/Content/styles.css?1422585377" rel="stylesheet" type="text/css" />
+<link href="~/Content/signup.css" rel="stylesheet" type="text/css" />
 
-<div class="login-body">
-    <div class="login-container">
-        @using (Html.BeginForm("SignUp", "User", FormMethod.Post, new { enctype = "multipart/form-data" }))
-        {
-            <div class="wrapper">
-                <div class="title"><span>SignUp Form</span></div>
-                <div class="cat-form">
-                    <div class="row">
-
-                        @Html.TextBoxFor(a => a.u_name, new { @class = "form-control", @placeholder = "Enter Name" })
-
-                    </div>
-                    <span style="color:red;">@Html.ValidationMessageFor(a => a.u_name)</span>
-                    <div class="row">
-
-                        @Html.TextBoxFor(a => a.u_email, new { @class = "form-control", @placeholder = "Enter Email ID" })
-
-                    </div>
-                    <span style="color:red;">@Html.ValidationMessageFor(a => a.u_email)</span>
-
-                    <div class="row">
-
-                        @Html.PasswordFor(a => a.u_password, new { @class = "form-control", @placeholder = "Enter Password" })
-
-                    </div>
-                    <span style="color:red;">@Html.ValidationMessageFor(a => a.u_password)</span>
-                    <div class="row">
-
-                        @Html.TextBoxFor(a => a.u_contact, new { @class = "form-control", @placeholder = "Enter Contact No" })
-
-                    </div>
-                    <span style="color:red;">@Html.ValidationMessageFor(a => a.u_contact)</span>
-
-                    <div class="row">
-
-                        <input type="file" placeholder="Select Profile Image" class="form-control" id="imgfile" name="imgfile" required />
-
-                    </div>
-                    <div class="row button">
-                        <input type="submit" value="SignUp" class="btn" />
-                    </div>
-
-                </div>
+<div class="wrapper">
+    <h2>SignUp Form</h2>
+    @using (Html.BeginForm("SignUp", "User", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <div class="form">
+            <div class="input-box">
+                @Html.TextBoxFor(a => a.u_name, new { @class = "form-control", @placeholder = "Enter Name" })
             </div>
-        }
-    </div>
+            <span style="color:red;">@Html.ValidationMessageFor(a => a.u_name)</span>
+
+            <div class="input-box">
+                @Html.TextBoxFor(a => a.u_email, new { @class = "form-control", @placeholder = "Enter Email ID" })
+            </div>
+            <span style="color:red;">@Html.ValidationMessageFor(a => a.u_email)</span>
+
+            <div class="input-box">
+                @Html.PasswordFor(a => a.u_password, new { @class = "form-control", @placeholder = "Create Password" })
+            </div>
+            <span style="color:red;">@Html.ValidationMessageFor(a => a.u_password)</span>
+
+            <div class="input-box">
+                @Html.TextBoxFor(a => a.u_contact, new { @class = "form-control", @placeholder = "Enter Contact No" })
+            </div>
+            <span style="color:red;">@Html.ValidationMessageFor(a => a.u_contact)</span>
+
+            <div class="input-box">
+                <input type="file" placeholder="Select Profile Image" class="form-control" id="imgfile" name="imgfile" required />
+            </div>
+
+            <div class="policy">
+                <input type="checkbox" />
+                <h3>I accept all terms &amp; conditions.</h3>
+            </div>
+
+            <div class="input-box button">
+                <input type="submit" value="Register Now" class="btn" />
+            </div>
+            <div class="text">
+                <h3>Already have an Account? <a href="/User/Login/">Login Now</a></h3>
+            </div>
+        </div>
+    }
 </div>
 
 <script src="~/Scripts/jquery.validate-vsdoc.js"></script>
@@ -63,6 +60,5 @@
 @section Scripts{
     @Scripts.Render("~/bundles/jqueryval")
 }
-
 
 

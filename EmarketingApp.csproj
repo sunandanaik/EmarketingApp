@@ -180,6 +180,7 @@
     <Content Include="Content\images\login-bg.jpg" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\pagination.css" />
+    <Content Include="Content\signup.css" />
     <Content Include="Content\styles.css" />
     <Content Include="Content\styles2.css" />
     <Content Include="favicon.ico" />

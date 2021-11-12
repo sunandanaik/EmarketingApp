@@ -12,7 +12,7 @@
     {
         <div class="form">
             <div class="field">
-                @Html.TextBoxFor(a => a.u_email, new { @class = "form-control",@required = "required" })
+                @Html.TextBoxFor(a => a.u_email, new { @class = "form-control", @required = "required" })
                 <label>Email Address</label>
             </div>
             <span style="color:red;">@Html.ValidationMessageFor(a => a.u_email)</span>
@@ -33,3 +33,14 @@
         </div>
     }
 </div>
+
+<script src="~/Scripts/jquery.validate-vsdoc.js"></script>
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+@section Scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+}
+

@@ -67,32 +67,32 @@ html,body {
     color: #4158d0;
     background-color: #fff;
 }
-    .wrapper .form .fpass{
-        color:#4158d0;
-        margin:8px 0 0 10px;
-    }
-    .wrapper .form .field input[type="submit"] {
-        color: #fff;
-        background: linear-gradient(-135deg,#c850c0,#4158d0);
-        font-size: 18px;
-        font-weight: 500;
-        border: none;
-        padding-left: 0px;
-        cursor: pointer;
-        transition: all 0.3s ease;
-    }
-    .wrapper .form .field input[type="submit"]:active{
-        transform:scale(0.95);
-    }
-    .wrapper .form .signup-link {
-        text-align:center;
-        margin-top:20px;
-        color:#262626;
-    }
-        .wrapper .form .signup-link a, .wrapper .form .fpass a{
-            color: #4158d0;
-            text-decoration:none;
-        }
-        .wrapper .form .signup-link a:hover, .wrapper .form .fpass a:hover{
-            text-decoration:underline;
-        }
+.wrapper .form .fpass{
+    color:#4158d0;
+    margin:8px 0 0 10px;
+}
+.wrapper .form .field input[type="submit"] {
+    color: #fff;
+    background: linear-gradient(-135deg,#c850c0,#4158d0);
+    font-size: 18px;
+    font-weight: 500;
+    border: none;
+    padding-left: 0px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.wrapper .form .field input[type="submit"]:active{
+    transform:scale(0.95);
+}
+.wrapper .form .signup-link {
+    text-align:center;
+    margin-top:20px;
+    color:#262626;
+}
+.wrapper .form .signup-link a, .wrapper .form .fpass a{
+    color: #4158d0;
+    text-decoration:none;
+}
+.wrapper .form .signup-link a:hover, .wrapper .form .fpass a:hover{
+    text-decoration:underline;
+}

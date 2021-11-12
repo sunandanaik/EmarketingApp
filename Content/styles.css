@@ -27,6 +27,7 @@ body {
     max-width: 440px;
     padding: 0 20px;
     margin: 115px auto;
+    border-radius:10px;
 }
 
 .wrapper {
