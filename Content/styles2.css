@@ -1,5 +1,5 @@
 ﻿@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400&display=swap');
-
+/*User Login Module Styling */
 * {
     margin: 0;
     padding: 0;
@@ -7,17 +7,23 @@
     font-family: 'Poppins', sans-serif;
 }
 
-html,body {
-    display:grid;
-    height:100%;
-    place-items:center;
-    background:#f2f2f2;
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    /*background:#f2f2f2;*/
+    background-image: url('images/userlogin-back.jpg');
+    background-repeat: no-repeat;
+    background-size: 100% 900px;
 }
-.wrapper{
-    width:380px;
-    background-color:#fff;
-    border-radius:15px;
-    box-shadow:0px 15px 20px rgba(0,0,0,0.1);
+.wrapper {
+    position: relative;
+    max-width: 430px;
+    width:100%;
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0px 15px 20px rgba(0,0,0,0.1);
 }
 .wrapper .title{
     line-height:100px;
@@ -96,3 +102,4 @@ html,body {
 .wrapper .form .signup-link a:hover, .wrapper .form .fpass a:hover{
     text-decoration:underline;
 }
+

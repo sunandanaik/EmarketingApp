@@ -7,7 +7,7 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" />
-    <link href="~/Content/styles.css?1422585377" rel="stylesheet" type="text/css" />
+    <link href="~/Content/styles.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -28,7 +28,7 @@
                     <li>
                         @if (Session["user_Sess_id"] != null)
                         {
-                            @Html.ActionLink("Post Ad", "PostAd", "User")
+                            @Html.ActionLink("Post Ad", "CreateAd", "User")
                         }
                     </li>
 
@@ -38,13 +38,13 @@
                     <li>
                         @if (Session["user_Sess_id"] == null)
                         {
-                            @Html.ActionLink("SignIn", "Login", "User")
+                            @Html.ActionLink("Login", "Login", "User")
                         }
                     </li>
                     <li>
                         @if (Session["user_Sess_id"] == null)
                         {
-                            @Html.ActionLink("SignUp", "SignUp", "User")
+                            @Html.ActionLink("Register", "SignUp", "User")
                         }
                         else
                         {
@@ -52,14 +52,17 @@
                         }
                     </li>
                 </ul>
+                
+                
             </div>
+            
         </div>
     </div>
     <div class="container body-content">
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>&copy; @DateTime.Now.Year - Copyright by SunCoder.</p>
         </footer>
     </div>
 

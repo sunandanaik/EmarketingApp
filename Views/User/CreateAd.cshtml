@@ -1,18 +1,59 @@
-﻿
+﻿@model EmarketingApp.Models.tbl_product
 @{
     //Layout = null;
     ViewBag.Title = "Add Post";
 }
 
-<!DOCTYPE html>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" />
+<link href="~/Content/signup.css" rel="stylesheet" type="text/css" />
+<style>
+    .ad-wrapper{
+        /*margin:auto;*/
+    }
+</style>
+    <div class="ad-wrapper">
+        <h2>Post an Ad</h2>
+        @using (Html.BeginForm("CreateAd", "User", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <div class="form">
+                <div class="input-box">
+                    @Html.DropDownListFor(model=>model.pro_fk_cat, ViewBag.categoryList as SelectList,"--Select Category--", new {@class="form-control"})
+                </div>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>CreateAd</title>
-</head>
-<body>
-    <div> 
+                <div class="input-box">
+                    @Html.TextBoxFor(model => model.pro_name, new { @class = "form-control", @placeholder = "Enter Name" })
+                </div>
+                <span style="color:red;">@Html.ValidationMessageFor(model => model.pro_name)</span>
+
+                <div class="input-box">
+                    <input type="file" placeholder="Select Profile Image" class="form-control" id="imgfile" name="imgfile" required />
+                </div>
+
+                <div class="input-box">
+                    @Html.TextBoxFor(model => model.pro_desc, new { @class = "form-control", @placeholder = "Enter Description" })
+                </div>
+                <span style="color:red;">@Html.ValidationMessageFor(model => model.pro_desc)</span>
+
+                <div class="input-box">
+                    @Html.TextBoxFor(model => model.pro_price, new { @class = "form-control", @placeholder = "Enter Price" })
+                </div>
+                <span style="color:red;">@Html.ValidationMessageFor(model => model.pro_price)</span>
+
+
+                <div class="input-box button">
+                    <input type="submit" value="Submit" class="btn" />
+                </div>
+        
+            </div>
+        }
     </div>
-</body>
-</html>
+
+<script src="~/Scripts/jquery.validate-vsdoc.js"></script>
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+@section Scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+}

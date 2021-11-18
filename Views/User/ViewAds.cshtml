@@ -1,0 +1,72 @@
+﻿@using PagedList.Mvc
+
+@model  PagedList.IPagedList<EmarketingApp.Models.tbl_product>
+
+@{
+    //Layout = null;
+    ViewBag.Title = "View Ads";
+}
+<style>
+    .cimg {
+        -webkit-transition: transform 5s;
+        transition: transform 5s;
+    }
+
+    .cimg:hover {
+        -webkit-transform: rotateZ(360deg);
+    }
+</style>
+
+<link href="~/Content/pagination.css" rel="stylesheet" />
+<h2>Index</h2>
+
+<div class="container" style="height:1150px;">
+    <div class="row">
+        <div class="col-lg-12" style="height:200px; border:1px solid solid; ">
+
+            <img src="~/Content/images/Modern-e-Commerce-Web-Design-Trends.-Part-2.gif" style="width:100%; height:100%" />
+
+        </div>
+    </div>
+    <!--Search form-->
+    <div class="row">
+        @using (@Html.BeginForm("ViewAds", "User"))
+        {
+            <div class="navbar-form">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Search" name="search" id="search">
+                </div>
+                <button type="submit" class="btn btn-success">Search</button>
+            </div>
+        }
+    </div>
+
+
+    <div class="row" style="margin-bottom:40px">
+        @{ int x = 0;}
+        @if (Model != null)
+        {
+            foreach (var item in Model)
+            {
+                x++;
+                <div class="col-lg-4 col-md-4" style="height:200px;margin-top:100px">
+                    <img class="img img-responsive cimg" src="@Url.Content(item.pro_image)" style=" height:100%;width:100% ;border-radius:50px 50px 50px 50px" />
+                    <h4 style="color:#808080; font-family:'Arial Rounded MT';text-align:center">@Html.ActionLink(@item.pro_name, "ViewAd", new { id = @item.pro_id })</h4>
+
+                </div>
+
+            }
+        }
+        <h4>@x Results found</h4>
+    </div>
+</div>
+
+<div id="container" style="margin-left: 20px">
+    <p></p>
+    <p></p>
+    <div class="pagination" style="margin-left: 400px">
+        Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
+        of @Model.PageCount   @Html.PagedListPager(Model, page => Url.Action("ViewAds", new { page }))
+    </div>
+</div>
+

@@ -297,3 +297,9 @@ body {
 .wrapper .cat-form .button input:hover {
     background: #12876f;
 }
+
+.astyle {
+    background-color: tomato;
+    border-radius: 5px;
+    color: #fff;
+}
