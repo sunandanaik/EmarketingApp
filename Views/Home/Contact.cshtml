@@ -1,36 +1,139 @@
-﻿@{
+﻿@model EmarketingApp.Models.tbl_contactus
+@{
     ViewBag.Title = "Contact";
 }
-<h2>@ViewBag.Title.</h2>
-@*<h3>@ViewBag.Message</h3>*@
 
-<div class="contact-container">
-    <form action="#">
-        <div class="title">@ViewBag.Title</div>
-        <div class="input-box underline">
-            <input type="text" placeholder="Enter Your FirstName" required>
-            <div class="underline"></div>
+<!-- Popper JS -->
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<!-- Include from the CDN -->
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.0.0-rc.5/dist/html2canvas.min.js"></script>
+<!-- Include locally otherwise -->
+<!-- <script src='html2canvas.js'></script> -->
+
+<h2 style="color: green; margin-top: 60px;">@ViewBag.Message</h2>
+
+<img id="contact-img" src="~/Content/images/contact-details.jpg" data-target="#mymodal" data-toggle="modal" />
+<br />
+<br />
+<div class="modal fade" id="mymodal" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" style="font-size:20px; cursor:pointer;"> &times; </button>
+            </div>
+
+
+            <div class="modal-body">
+                <div class="contact-container">
+
+                    @using (Html.BeginForm("Contact", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                        @*<span style="color:green;">@ViewBag.Message</span>*@
+                        <form action="#">
+
+                            <div class="title">@ViewBag.Title</div>
+
+                            <div class="label-box">
+                                <label>Name<span style="color:red;">*</span></label>
+                            </div>
+                            <div class="input-box underline">
+
+                                <input type="text" name="Contact_Name" placeholder="Enter Name here" required>
+                                <div class="underline"></div>
+                            </div>
+
+                            <div class="label-box">
+                                <label>Email Address<span style="color:red;">**</span></label>
+                            </div>
+
+                            <div class="input-box">
+                                <input type="text" name="Email_Address" placeholder="Enter Email Address" required>
+                                <div class="underline"></div>
+                            </div>
+
+                            <div class="label-box">
+                                <label>Phone Number<span style="color:red;">**</span></label>
+                            </div>
+                            <div class="input-box">
+                                <input type="text" name="Phone_No" placeholder="Enter Phone No" required>
+                                <div class="underline"></div>
+                            </div>
+
+                            <div class="label-box">
+                                <label>Are you a PNBIL Account Holder?<span style="color:red;">*</span></label>
+                            </div>
+                            <div class="radio-box">
+                                <input type="radio" id="r1" name="Account_holder" value="Yes" />Yes
+                                <input type="radio" id="r2" name="Account_holder" value="No" />No
+                            </div>
+
+                            <div class="label-box">
+                                <label>Preferred Branch<span style="color:red;">*</span></label>
+                            </div>
+                            <div class="input-box">
+                                <select class="form-control" id="branch" name="Preferred_Branch">
+                                    <option value="Moorgate">Moorgate</option>
+                                    <option value="Southall">Southall</option>
+                                    <option value="Leicester">Leicester</option>
+                                    <option value="Birmingham">Birmingham</option>
+                                    <option value="Ilford">Ilford</option>
+                                    <option value="Wembley">Wembley</option>
+                                    <option value="Wolverhampton">Wolverhampton</option>
+                                </select>
+                            </div>
+
+                            <div class="label-box">
+                                <label>Type of Query<span style="color:red;">*</span></label>
+                            </div>
+                            <div class="input-box">
+                                <select class="form-control" id="type_query" name="Query_Type">
+                                    <option value="Products & Services">Products & Services</option>
+                                    <option value="General enquiries">General enquiries</option>
+                                    <option value="Others">Others</option>
+
+                                </select>
+                            </div>
+
+                            <div class="label-box">
+                                <label>Your Message<span style="color:red;">*</span></label>
+                            </div>
+                            <div class="msg-box">
+                                <textarea id="Message" name="Message" rows="4" cols="50" class="textarea-field" onkeyup="charCount(this)"></textarea>
+                                <div style="margin-top:5px;"><label style="color:darkred;">Maximum 320 Characters (<span id="excessCount">0</span> in excess)</label></div>
+                            </div>
+
+                            <div class="check-box">
+                                <input type="checkbox" value="privacy_notice" />
+                                <label style="font-size:10px; color:gray;">By checking this box you confirm that you have read and agree to our <a href="#" style="color:red;">Privacy Notice</a> </label>
+                            </div>
+                            <div class="button-box button-container">
+
+                                <input type="submit" name="submit" value="Send">
+                                <input type="reset" name="reset" value="Cancel">
+                                <input type="button" name="save" value="Save Data" onclick='screenshot();'>
+
+                            </div>
+                        </form>
+                        @*<div class="option">or Connect With Social Media</div>
+                            <div class="twitter">
+                                <a href="#"><i class="fab fa-twitter"></i>Sign in With Twitter</a>
+                            </div>
+                            <div class="facebook">
+                                <a href="#"><i class="fab fa-facebook-f"></i>Sign in With Facebook</a>
+                            </div>*@
+                    }
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                @*if required*@
+
+            </div>
         </div>
-        <div class="input-box">
-            <input type="text" placeholder="Enter Your Email ID" required>
-            <div class="underline"></div>
-        </div>
-        <div class="input-box">
-            <input type="text" placeholder="Enter Your Mobile No" required>
-            <div class="underline"></div>
-        </div>
-        <div class="input-box button">
-            <input type="submit" name="" value="Send">
-        </div>
-    </form>
-    @*<div class="option">or Connect With Social Media</div>
-    <div class="twitter">
-        <a href="#"><i class="fab fa-twitter"></i>Sign in With Twitter</a>
     </div>
-    <div class="facebook">
-        <a href="#"><i class="fab fa-facebook-f"></i>Sign in With Facebook</a>
-    </div>*@
 </div>
+<div id="output"></div>
 
 <address>
     One Microsoft Way<br />
@@ -43,3 +146,51 @@
     <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
     <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
 </address>
+
+
+@* Javascript code to display Count of excess character of Textarea*@
+<script type="text/javascript">
+
+    function charCount(textarea) {
+        var max = 320;
+        var length = textarea.value.length;
+        //alert(length);
+
+        excessChar = length - max;
+        $('#excessCount').text(excessChar);
+
+        //OR
+        //if (length > max) {
+        //    excessChar = length - max;
+        //    $('#excessCount').text(excessChar);
+        //}
+        //else {
+        //    $('#excessCount').text("0");
+        //}
+    }
+
+    //Script to take screenshot
+    // Use the html2canvas function to take a screenshot and append it to the output div
+    function screenshot() {
+        let div = document.getElementById('mymodal');
+
+        html2canvas(div).then(function (canvas) {
+            document.getElementById('output').appendChild(canvas);
+        });
+    }
+
+    
+
+</script>
+
+
+@section Scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<script src="~/Scripts/jquery.validate-vsdoc.js"></script>
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+

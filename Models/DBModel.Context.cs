@@ -30,5 +30,7 @@ namespace EmarketingApp.Models
         public virtual DbSet<tbl_product> tbl_product { get; set; }
         public virtual DbSet<tbl_user> tbl_user { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
+        public virtual DbSet<tbl_contactus> tbl_contactus { get; set; }
+        public virtual DbSet<FixedDeposit> FixedDeposits { get; set; }
     }
 }

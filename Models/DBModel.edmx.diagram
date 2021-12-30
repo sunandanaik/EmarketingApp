@@ -13,6 +13,8 @@
         <AssociationConnector Association="dbemarketingModel.FK__tbl_produ__pro_f__412EB0B6" ManuallyRouted="false" />
         <AssociationConnector Association="dbemarketingModel.FK__tbl_produ__pro_f__4222D4EF" ManuallyRouted="false" />
         <EntityTypeShape EntityType="dbemarketingModel.sysdiagram" Width="1.5" PointX="5.375" PointY="4.75" />
+        <EntityTypeShape EntityType="dbemarketingModel.tbl_contactus" Width="1.5" PointX="7.375" PointY="0.75" />
+        <EntityTypeShape EntityType="dbemarketingModel.FixedDeposit" Width="1.5" PointX="7.375" PointY="4.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

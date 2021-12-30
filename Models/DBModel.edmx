@@ -5,6 +5,16 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="dbemarketingModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="FixedDeposit">
+          <Key>
+            <PropertyRef Name="FixedDepositId" />
+          </Key>
+          <Property Name="FixedDepositId" Type="int" Nullable="false" />
+          <Property Name="Currency" Type="int" Nullable="false" />
+          <Property Name="Rate" Type="float" Nullable="false" />
+          <Property Name="FromSlab" Type="float" Nullable="false" />
+          <Property Name="ToSlab" Type="float" Nullable="false" />
+        </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
@@ -32,6 +42,19 @@
           <Property Name="cat_image" Type="nvarchar(max)" Nullable="false" />
           <Property Name="cat_fk_ad" Type="int" />
           <Property Name="cat_status" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="tbl_contactus">
+          <Key>
+            <PropertyRef Name="Contact_id" />
+          </Key>
+          <Property Name="Contact_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Contact_Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email_Address" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Phone_No" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="Account_holder" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="Preferred_Branch" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Query_Type" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Message" Type="varchar" MaxLength="400" Nullable="false" />
         </EntityType>
         <EntityType Name="tbl_product">
           <Key>
@@ -93,9 +116,11 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="dbemarketingModelStoreContainer">
+          <EntitySet Name="FixedDeposit" EntityType="Self.FixedDeposit" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_admin" EntityType="Self.tbl_admin" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_category" EntityType="Self.tbl_category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_contactus" EntityType="Self.tbl_contactus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_product" EntityType="Self.tbl_product" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_user" EntityType="Self.tbl_user" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__tbl_categ__cat_f__3A81B327" Association="Self.FK__tbl_categ__cat_f__3A81B327">
@@ -216,6 +241,8 @@
             <End Role="tbl_product" EntitySet="tbl_product" />
           </AssociationSet>
           <EntitySet Name="sysdiagrams" EntityType="dbemarketingModel.sysdiagram" />
+          <EntitySet Name="tbl_contactus" EntityType="dbemarketingModel.tbl_contactus" />
+          <EntitySet Name="FixedDeposits" EntityType="dbemarketingModel.FixedDeposit" />
         </EntityContainer>
         <EntityType Name="sysdiagram">
           <Key>
@@ -226,6 +253,29 @@
           <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="version" Type="Int32" />
           <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="tbl_contactus">
+          <Key>
+            <PropertyRef Name="Contact_id" />
+          </Key>
+          <Property Name="Contact_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Contact_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email_Address" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Phone_No" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="Account_holder" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="Preferred_Branch" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Query_Type" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Message" Type="String" Nullable="false" MaxLength="400" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="FixedDeposit">
+          <Key>
+            <PropertyRef Name="FixedDepositId" />
+          </Key>
+          <Property Name="FixedDepositId" Type="Int32" Nullable="false" />
+          <Property Name="Currency" Type="Int32" Nullable="false" />
+          <Property Name="Rate" Type="Double" Nullable="false" />
+          <Property Name="FromSlab" Type="Double" Nullable="false" />
+          <Property Name="ToSlab" Type="Double" Nullable="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -286,6 +336,31 @@
                 <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
                 <ScalarProperty Name="principal_id" ColumnName="principal_id" />
                 <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_contactus">
+            <EntityTypeMapping TypeName="dbemarketingModel.tbl_contactus">
+              <MappingFragment StoreEntitySet="tbl_contactus">
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="Query_Type" ColumnName="Query_Type" />
+                <ScalarProperty Name="Preferred_Branch" ColumnName="Preferred_Branch" />
+                <ScalarProperty Name="Account_holder" ColumnName="Account_holder" />
+                <ScalarProperty Name="Phone_No" ColumnName="Phone_No" />
+                <ScalarProperty Name="Email_Address" ColumnName="Email_Address" />
+                <ScalarProperty Name="Contact_Name" ColumnName="Contact_Name" />
+                <ScalarProperty Name="Contact_id" ColumnName="Contact_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FixedDeposits">
+            <EntityTypeMapping TypeName="dbemarketingModel.FixedDeposit">
+              <MappingFragment StoreEntitySet="FixedDeposit">
+                <ScalarProperty Name="ToSlab" ColumnName="ToSlab" />
+                <ScalarProperty Name="FromSlab" ColumnName="FromSlab" />
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+                <ScalarProperty Name="Currency" ColumnName="Currency" />
+                <ScalarProperty Name="FixedDepositId" ColumnName="FixedDepositId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

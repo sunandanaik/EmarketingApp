@@ -1,15 +1,21 @@
-﻿@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400&display=swap');
+﻿/*Home Modules Styling */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400&display=swap');
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
+    
+}
+h2 {
+    font-size: 16px;
 }
 
 body {
     background-color: #ecf0f1;
     overflow: auto;
+    margin-top:40px;
 }
 /*Styling for Admin/Login module*/
 .login-body {
@@ -135,9 +141,18 @@ body {
     background: #ff80bf;
 }
 
+#contact-img {
+    margin: auto;
+    margin-top: 50px;
+    padding: 40px 30px;
+    width: 800px;
+    height: 121px;
+    cursor: pointer;
+}
+
 .contact-container {
     background: #fff;
-    max-width: 350px;
+    max-width: 550px;
     width: 100%;
     padding: 25px 30px;
     border-radius: 5px;
@@ -165,12 +180,36 @@ body {
     border-radius: 5px;
     background: linear-gradient(to right, #99004d 0%, #ff0080 100%);
 }
+.contact-container form .label-box {
+    width: 100%;
+    height: 5px;
+    margin-top: 25px;
+    position: relative;
+}
 
 .contact-container form .input-box {
     width: 100%;
     height: 45px;
     margin-top: 25px;
     position: relative;
+}
+.contact-container form .radio-box {
+    width: 100%;
+    height: 25px;
+    margin-top: 25px;
+    position: relative;
+}
+.contact-container form .check-box {
+    width: 100%;
+    height: 25px;
+    margin-top: 20px;
+    position: relative;
+}
+.contact-container form .msg-box {
+    margin-top: 25px;
+        
+    /*width: 310px;
+    height: 79px;*/
 }
 
 .contact-container form .input-box input {
@@ -210,23 +249,44 @@ body {
     transform-origin: left;
 }
 
-.contact-container form .button {
-    margin: 40px 0 20px 0;
+.contact-container form .button-container {
+    width: 100%;
+    margin-top: 20px;
 }
 
-.contact-container .input-box input[type="submit"] {
+
+.contact-container .button-box input[type="submit"] {
     background: linear-gradient(to right, #99004d 0%, #ff0080 100%);
     font-size: 17px;
     color: #fff;
     border-radius: 5px;
     cursor: pointer;
     transition: all 0.3s ease;
+    width:120px;
 }
+.contact-container .button-box input[type="reset"] {
+    background: lightgrey;
+    font-size: 17px;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 120px;
+}
+    .contact-container .button-box input[type="button"] {
+        background: linear-gradient(to right, #99004d 0%, #ff0080 100%);
+        font-size: 17px;
+        color: #fff;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        width: 120px;
+    }
 
-.contact-container .input-box input[type="submit"]:hover {
-    letter-spacing: 1px;
-    background: linear-gradient(to left, #99004d 0%, #ff0080 100%);
-}
+    .contact-container .button-box input[type="submit"]:hover, input[type="reset"]:hover, input[type="button"]:hover {
+        letter-spacing: 1px;
+        background: linear-gradient(to left, #99004d 0%, #ff0080 100%);
+    }
 
 .contact-container .option {
     font-size: 14px;
@@ -273,6 +333,8 @@ body {
     margin: 20px 0 50px 0;
 }
 
+
+
 /*Styling for Admin/Create module */
 .wrapper .cat-form .row {
     margin-left: 30px;
@@ -303,3 +365,98 @@ body {
     border-radius: 5px;
     color: #fff;
 }
+
+/* Home/FDCalculator Module Styling (28/12/2021) */
+.fdform{
+    width:800px;
+    background-color:rgba(0,0,0,0.5);
+    margin:auto;
+    color:#fff;
+    padding:10px 0px 10px 0px;
+    text-align:center;
+    border-radius:15px 15px 0px 0px;
+}
+.main {
+    background-color: rgba(183, 21, 64,0.6);
+    width:800px;
+    margin: auto;
+}
+form{
+    padding:10px;
+}
+.fd{
+    margin-left:25px;
+    margin-top:30px;
+    width:137px;
+    color:white;
+    font-weight:700;
+    text-transform:capitalize;
+}
+.damt{
+    position:relative;
+    left:200px;
+    top:-37px;
+    line-height:40px;
+    border-radius:6px;
+    padding:0 22px;
+
+}
+.slider {
+    position: relative;
+    left: 200px;
+}
+.dtype {
+    position: relative;
+    left: 200px;
+    top: -37px;
+    line-height: 40px;
+    border-radius: 6px;
+    padding: 0 22px;
+}
+.currency {
+    position: relative;
+    left: 200px;
+    top: -37px;
+    line-height: 40px;
+    border-radius: 6px;
+    padding: 0 22px;
+}
+.tenure {
+    position: relative;
+    left: 200px;
+    top: -37px;
+    line-height: 40px;
+    border-radius: 6px;
+    padding: 0 22px;
+}
+.ipo {
+    position: relative;
+    left: 200px;
+    top: -37px;
+    line-height: 40px;
+    border-radius: 6px;
+    padding: 0 22px;
+}
+#outputcal{
+    margin-top:10px;
+}
+#rate{
+    margin-bottom:10px;
+}
+form .button {
+    background: linear-gradient(to right, #99004d 0%, #ff0080 100%);
+    font-size: 17px;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    position: relative;
+    left: 200px;
+    top: -27px;
+    line-height: 40px;
+    border-radius: 6px;
+    padding: 0 22px;
+    width:295px;
+    transition: all 0.3s ease;
+}
+
+

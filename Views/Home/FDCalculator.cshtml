@@ -1,0 +1,127 @@
+﻿
+@{
+    ViewBag.Title = "FDCalculator";
+}
+
+
+<div class="fdform"><h2>@ViewBag.Message</h2></div>
+
+
+<div class="main">
+    @*@using(Html.BeginForm("FDCalculator", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {*@
+    <form action="#">
+        <h2 class="fd">Deposit Amount<span style="color:red;">*</span></h2>
+        <input class="damt form-control" type="number" id="deposit_amount" name="deposit_amount" oninput='slider.value=deposit_amount.value' value="10000" />
+        <input type="range" class='slider' id='slider' max='1500000' min='10000' step="1000" oninput='deposit_amount.value=slider.value'>
+
+        <h2 class="fd">Type of Deposit<span style="color:red;">*</span></h2>
+        <select class="dtype form-control" id="deposit_type" name="deposit_type">
+            <option disabled="disabled" selected="selected">--Choose Option--</option>
+            <option>Fixed Rate Bond</option>
+            <option>Fixed rate ISA</option>
+        </select>
+
+        <h2 class="fd">Currency<span style="color:red;">*</span></h2>
+        <select class="currency form-control" id="currency" name="currency">
+            <option disabled="disabled" selected="selected">--Choose Option--</option>
+            <option value="1">GBP</option>
+            <option value="2">USD</option>
+            <option value="3">EUR</option>
+        </select>
+
+        <h2 class="fd">Tenure<span style="color:red;">*</span></h2>
+        <select class="tenure form-control" id="tenure" name="tenure">
+            <option disabled="disabled" selected="selected">--Choose Option--</option>
+            <option value="3">3 months</option>
+            <option value="6">6 months</option>
+            <option value="12">1 year</option>
+            <option value="24">2 years</option>
+            <option value="36">3 years</option>
+            <option value="48">4 years</option>
+            <option value="60">5 years</option>
+        </select>
+
+        <h2 class="fd">Interest Pay out<span style="color:red;">*</span></h2>
+        <select class="ipo form-control" id="int_pay_out" name="int_pay_out">
+            <option disabled="disabled" selected="selected">--Choose Option--</option>
+            <option value="maturity_int_pay">Maturity Interest Payment</option>
+            <option value="annual_int_pay">Annual Interest Payment</option>
+        </select>
+
+        <span id="outputcal">Maturity Value</span> <span class="font-weight-bold" id="fdoutput"></span><br />
+        <span id="rate"></span> <span class="font-weight-bold" id="roi"></span>%<br />
+
+        <button class="btn btn-success button" id="calculate">Calculate</button>
+    </form>
+    @*}*@
+</div>
+
+
+
+<script src="~/Scripts/jquery.validate-vsdoc.js"></script>
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+@*@section Scripts{
+        @Scripts.Render("~/bundles/jqueryval")
+    }*@
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        //alert("I am Calculator");
+        $("#calculate").click(function () {
+            //alert("Inside button");
+            var param = JSON.stringify({
+                Currency: $("#currency").val(),
+                inputValue: $("#deposit_amount").val(),
+                pay_out: $("#int_pay_out").val(),
+                tenureValue: $("#tenure").val(),
+                dtype:$("#deposit_type").val()
+                
+
+            });
+            console.log(param);
+            $.ajax({
+                method: 'POST',
+                url: '/FDInterestRate/GetFDRate',
+                data: param,
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                
+                success: function (dataToSend) {
+                    //console.log("Hello "+dataToSend);
+                    
+                    if (dataToSend != null) {
+                        
+                        $("#outputcal").text('Maturity Value :');
+                        $("#fdoutput").text(dataToSend.Calculated);
+                        
+                        $("#rate").text('Rate of Interest : ');
+                        $("#roi").text(dataToSend.FDRate);
+
+                        console.log("Testing ");
+                    }
+                    else {
+                        $("#fdoutput").val(0);
+                        $("#roi").val(0);
+
+                        alert("Unable to evaluate value.");
+                    }
+                },
+                error: function (error) {
+                    alert("My Error is:"+error.responseText);
+                    $("#outputcal").text('');
+                    $("#fdoutput").text('');
+                    $("#rate").text('');
+                    $("#roi").text('');
+                }
+            });
+        });
+
+    });
+</script>
+
+
