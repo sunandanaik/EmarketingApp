@@ -76,10 +76,95 @@ namespace EmarketingApp.Controllers
         {
             ViewBag.Message = "Fixed Deposit Interest Rate Calculator";
 
+            //Generic List created to populate into UI dropdownlist.
+            List<SelectListItem> li = new List<SelectListItem>();
+            li.Add(new SelectListItem { Text = "Fixed Rate Bond", Value = "0" });
+            li.Add(new SelectListItem { Text = "Fixed Rate ISA", Value = "1" });
+            ViewData["deposittypeslist"] = li; //to pass to the View
+            
             return View();
         }
 
-        
-        
+        public JsonResult GetCurrencies(string id)
+        {
+            List<SelectListItem> currencies = new List<SelectListItem>();
+            switch (id)
+            {
+                case "0":   currencies.Add(new SelectListItem { Text = "Select", Value = "0" });
+                            currencies.Add(new SelectListItem { Text = "GBP", Value = "1" });
+                            currencies.Add(new SelectListItem { Text = "USD", Value = "2" });
+                            currencies.Add(new SelectListItem { Text = "EUR", Value = "3" });
+                    break;
+                case "1":  currencies.Add(new SelectListItem { Text = "Select", Value = "0" });
+                           currencies.Add(new SelectListItem { Text = "GBP", Value = "1" });
+                    break;
+
+            }
+
+            return Json(currencies,JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult GetTenures(string tdid,string cid)
+        {
+            List<SelectListItem> tenures = new List<SelectListItem>();
+            switch (tdid)
+            {
+                case "0":
+                    switch (cid)
+                    {
+                        case "1":
+                            tenures.Add(new SelectListItem { Text = "Select", Value = "0" });
+                            tenures.Add(new SelectListItem { Text = "3 months", Value = "3" });
+                            tenures.Add(new SelectListItem { Text = "6 months", Value = "6" });
+                            tenures.Add(new SelectListItem { Text = "1 year", Value = "12" });
+                            tenures.Add(new SelectListItem { Text = "2 years", Value = "24" });
+                            tenures.Add(new SelectListItem { Text = "3 years", Value = "36" });
+                            tenures.Add(new SelectListItem { Text = "4 years", Value = "48" });
+                            tenures.Add(new SelectListItem { Text = "5 years", Value = "60" });
+                            break;
+
+                        case "2":
+                            tenures.Add(new SelectListItem { Text = "Select", Value = "0" });
+                            tenures.Add(new SelectListItem { Text = "3 months", Value = "3" });
+                            tenures.Add(new SelectListItem { Text = "6 months", Value = "6" });
+                            tenures.Add(new SelectListItem { Text = "1 year", Value = "12" });
+                            tenures.Add(new SelectListItem { Text = "2 years", Value = "24" });
+                            tenures.Add(new SelectListItem { Text = "3 years", Value = "36" });
+                            tenures.Add(new SelectListItem { Text = "4 years", Value = "48" });
+                            tenures.Add(new SelectListItem { Text = "5 years", Value = "60" });
+                            break;
+
+                        case "3":
+                            tenures.Add(new SelectListItem { Text = "Select", Value = "0" });
+                            tenures.Add(new SelectListItem { Text = "3 months", Value = "3" });
+                            tenures.Add(new SelectListItem { Text = "6 months", Value = "6" });
+                            tenures.Add(new SelectListItem { Text = "1 year", Value = "12" });
+                            tenures.Add(new SelectListItem { Text = "2 years", Value = "24" });
+                            tenures.Add(new SelectListItem { Text = "3 years", Value = "36" });
+                            tenures.Add(new SelectListItem { Text = "4 years", Value = "48" });
+                            tenures.Add(new SelectListItem { Text = "5 years", Value = "60" });
+                            break;
+                    }
+                    break;
+
+                case "1":
+                    switch (cid)
+                    {
+                        case "1":
+                            tenures.Add(new SelectListItem { Text = "Select", Value = "0" });
+                            tenures.Add(new SelectListItem { Text = "1 year", Value = "12" });
+                            tenures.Add(new SelectListItem { Text = "2 years", Value = "24" });
+                            tenures.Add(new SelectListItem { Text = "3 years", Value = "36" });
+                            tenures.Add(new SelectListItem { Text = "4 years", Value = "48" });
+                            tenures.Add(new SelectListItem { Text = "5 years", Value = "60" });
+                            break;
+
+                    }
+                    break;
+
+            }
+            
+            return Json(tenures,JsonRequestBehavior.AllowGet);
+        }
     }
 }

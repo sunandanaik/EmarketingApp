@@ -25,7 +25,7 @@ namespace EmarketingApp.DbOperations
                                    select fd.Rate).First();
 
                 
-                var n = 1; //by default
+                var n = 1; //by default Compounded yearly
                 var rate_in_dec = getRateData / 100;
 
                 if (pay_out == "maturity_int_pay")

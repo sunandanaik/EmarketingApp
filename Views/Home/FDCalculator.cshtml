@@ -12,35 +12,41 @@
         {*@
     <form action="#">
         <h2 class="fd">Deposit Amount<span style="color:red;">*</span></h2>
+        @*<span class="font-weight-bold">&#163;</span>*@
         <input class="damt form-control" type="number" id="deposit_amount" name="deposit_amount" oninput='slider.value=deposit_amount.value' value="10000" />
-        <input type="range" class='slider' id='slider' max='1500000' min='10000' step="1000" oninput='deposit_amount.value=slider.value'>
+        <div class="value left">0</div>
+        <input type="range" class='slider' id='slider' min='10000' max='1500000' step="1000" value="10000" oninput='deposit_amount.value=slider.value'>
+        <div class="value right">1,50,0000</div>
 
         <h2 class="fd">Type of Deposit<span style="color:red;">*</span></h2>
-        <select class="dtype form-control" id="deposit_type" name="deposit_type">
-            <option disabled="disabled" selected="selected">--Choose Option--</option>
-            <option>Fixed Rate Bond</option>
-            <option>Fixed rate ISA</option>
-        </select>
+        @Html.DropDownList("deposit_type", ViewData["deposittypeslist"] as List<SelectListItem>, "--Choose Option--", new { @class = "dtype form-control", @name = "deposit_type" })
+        <!--<select class="dtype form-control" id="deposit_type" name="deposit_type">
+        <option disabled="disabled" selected="selected">--Choose Option--</option>-->
+        @*<option>Fixed Rate Bond</option>
+        <option>Fixed rate ISA</option>*@
+        <!--</select>-->
 
         <h2 class="fd">Currency<span style="color:red;">*</span></h2>
-        <select class="currency form-control" id="currency" name="currency">
-            <option disabled="disabled" selected="selected">--Choose Option--</option>
-            <option value="1">GBP</option>
+        @Html.DropDownList("currency", new SelectList(string.Empty, "Value", "Text"), "--Choose Option--", new { @class = "currency form-control", @name = "currency" })
+        <!--<select class="currency form-control" id="currency" name="currency">
+            <option disabled="disabled" selected="selected">--Choose Option--</option>-->
+            @*<option value="1">GBP</option>
             <option value="2">USD</option>
-            <option value="3">EUR</option>
-        </select>
+            <option value="3">EUR</option>*@
+        <!--</select>-->
 
         <h2 class="fd">Tenure<span style="color:red;">*</span></h2>
-        <select class="tenure form-control" id="tenure" name="tenure">
-            <option disabled="disabled" selected="selected">--Choose Option--</option>
-            <option value="3">3 months</option>
+        @Html.DropDownList("tenure", new SelectList(string.Empty, "Value", "Text"), "--Choose Option--", new { @class = "tenure form-control", @name = "tenure" })
+        <!--<select class="tenure form-control" id="tenure" name="tenure">
+            <option disabled="disabled" selected="selected">--Choose Option--</option>-->
+            @*<option value="3">3 months</option>
             <option value="6">6 months</option>
             <option value="12">1 year</option>
             <option value="24">2 years</option>
             <option value="36">3 years</option>
             <option value="48">4 years</option>
-            <option value="60">5 years</option>
-        </select>
+            <option value="60">5 years</option>*@
+        <!--</select>-->
 
         <h2 class="fd">Interest Pay out<span style="color:red;">*</span></h2>
         <select class="ipo form-control" id="int_pay_out" name="int_pay_out">
@@ -49,15 +55,13 @@
             <option value="annual_int_pay">Annual Interest Payment</option>
         </select>
 
-        <span id="outputcal">Maturity Value</span> <span class="font-weight-bold" id="fdoutput"></span><br />
-        <span id="rate"></span> <span class="font-weight-bold" id="roi"></span>%<br />
+        <span id="outputcal">Maturity Value-</span>&#163;<span class="font-weight-bold" id="fdoutput">xxxxxx</span><br />
+        <span id="rate">Rate -</span> <span class="font-weight-bold" id="roi">xx</span>%<br />
 
         <button class="btn btn-success button" id="calculate">Calculate</button>
     </form>
     @*}*@
 </div>
-
-
 
 <script src="~/Scripts/jquery.validate-vsdoc.js"></script>
 <script src="~/Scripts/jquery.validate.js"></script>
@@ -70,20 +74,80 @@
     }*@
 
 <script type="text/javascript">
+
+    var dtype = $("#deposit_type").val();
+    var cur = $("#currency").val();
+    var tnr = $("#tenure").val();
+
+    //Calculate Button Click Script
     $(document).ready(function () {
+
+        //Dropdownlist Selectedchange event
+        $("#deposit_type").change(function () {
+            $("#currency").empty();
+            $("#tenure").empty();
+            var param = JSON.stringify({ id: $("#deposit_type").val() });
+            $.ajax({
+                type: 'POST',
+                url: '/Home/GetCurrencies', //we are calling json method in controller
+                dataType: 'json',
+                contentType: "application/json; charset=utf-8",
+                data: param, //here we get value of selected deposit type and pass same as input to json method GetCurrencies.
+                success: function (currencies) {
+                    //alert("Hi" + currencies[0].Text.toString());
+                    console.log(currencies);
+                    //currencies contains Json formatted list of currencies passed from controller
+                    $.each(currencies, function (i, curry) {
+                        $("#currency").append('<option value="' + curry.Value + '">' + curry.Text + '</option>');//Here adding options for currency
+                    });
+                },
+                error: function (ex) {
+                    alert('Failed to retrieve currencies.' + ex);
+                }
+            });
+            return false;
+        });
+
+        $("#currency").change(function () {
+            $("#tenure").empty();
+            var param2 = JSON.stringify({
+                tdid: $("#deposit_type").val(),
+                cid: $("#currency").val()
+            });
+            $.ajax({
+                type: 'POST',
+                url: '/Home/GetTenures',
+                dataType: 'json',
+                contentType: "application/json; charset=utf-8",
+                data: param2,
+
+                success: function (tenures) {
+                    //alert("Hi" + tenures[1].Text.toString());
+                    console.log(tenures);
+
+                    $.each(tenures, function (i, ten) {
+                        $("#tenure").append('<option value="' + ten.Value + '">' + ten.Text + '</option>');
+                    });
+                },
+                error: function (ex) {
+                    alert('Failed to retrieve tenures.' + ex);
+                }
+            });
+            return false;
+        });
+
+        //Calculate Button CLick Script
         //alert("I am Calculator");
         $("#calculate").click(function () {
-            //alert("Inside button");
+            alert("Inside button");
             var param = JSON.stringify({
                 Currency: $("#currency").val(),
                 inputValue: $("#deposit_amount").val(),
                 pay_out: $("#int_pay_out").val(),
                 tenureValue: $("#tenure").val(),
                 dtype:$("#deposit_type").val()
-                
-
             });
-            console.log(param);
+            console.log("Hi:"+param);
             $.ajax({
                 method: 'POST',
                 url: '/FDInterestRate/GetFDRate',
@@ -91,7 +155,7 @@
                 dataType: "json",
                 contentType: "application/json; charset=utf-8",
                 
-                success: function (dataToSend) {
+                success: function(dataToSend) {
                     //console.log("Hello "+dataToSend);
                     
                     if (dataToSend != null) {

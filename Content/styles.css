@@ -383,6 +383,7 @@ body {
 }
 form{
     padding:10px;
+    position:relative;
 }
 .fd{
     margin-left:25px;
@@ -404,6 +405,18 @@ form{
 .slider {
     position: relative;
     left: 200px;
+}
+form .value {
+    position: absolute;
+    font-weight:600;
+    color:#fff;
+}
+form .value.left{
+    left:200px;
+}
+form .value.right{
+    right:235px;
+    top:100px;
 }
 .dtype {
     position: relative;

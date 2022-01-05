@@ -25,6 +25,9 @@ namespace EmarketingApp.Controllers
             {
                 var calculatedFDInterest = fdrepository.GetCalculatedFDInterest(Currency, inputValue, pay_out, tenureValue, dtype);
                 var rate = calculatedFDInterest  / inputValue;
+
+                Response.Write("Hello from MVC action method");
+
                 var dataToSend = new
                 {
                     Calculated = Math.Round((double)calculatedFDInterest, 2),
