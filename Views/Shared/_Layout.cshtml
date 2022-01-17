@@ -26,6 +26,7 @@
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                     <li>@Html.ActionLink("Fixed Deposit Interest Calculator", "FDCalculator", "Home")</li>
+                    <li>@Html.ActionLink("Contact Us", "ContactUs", "ContactUs")</li>
                     <li>
                         @if (Session["user_Sess_id"] != null)
                         {
@@ -53,10 +54,10 @@
                         }
                     </li>
                 </ul>
-                
-                
+
+
             </div>
-            
+
         </div>
     </div>
     <div class="container body-content">
@@ -66,9 +67,10 @@
             <p>&copy; @DateTime.Now.Year - Copyright by SunCoder.</p>
         </footer>
     </div>
-
+    
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+
     @RenderSection("scripts", required: false)
 </body>
 </html>

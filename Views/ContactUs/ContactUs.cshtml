@@ -1,0 +1,198 @@
+﻿@{
+    ViewBag.Title = "Contact";
+}
+
+<!-- Popper JS -->
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<!-- Include from the CDN -->
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.0.0-rc.5/dist/html2canvas.min.js"></script>
+<!-- Include locally otherwise -->
+<!-- <script src='html2canvas.js'></script> -->
+<!--Html2Pdf cdn-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+@*<script type="text/javascript">
+    function PrintDiv() {
+        var divToPrint = document.getElementById("element-to-print");
+        var popupWin = window.open('', '_blank', 'width=500,height=800');
+        popupWin.document.open();
+        popupWin.document.write('<html><body onload="window.print()">' + divToPrint.innerHTML + '</html>');
+        popupWin.document.close();
+
+    }
+</script>*@
+
+<h2 style="color: green; margin-top: 60px;">@ViewBag.Message</h2>
+
+<div  id="element-to-print">
+
+    <div class="contact-container">
+
+        @using (Html.BeginForm("SubmitForm", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+
+            <form action="#">
+
+                <div class="title">@ViewBag.Title</div>
+
+                <div class="label-box">
+                    <label>Name<span style="color:red;">*</span></label>
+                </div>
+                <div class="input-box underline">
+
+                    <input type="text" id="Contact_Name" name="Contact_Name" placeholder="Enter Name here" required>
+                    <div class="underline"></div>
+                </div>
+
+                <div class="label-box">
+                    <label>Email Address<span style="color:red;">**</span></label>
+                </div>
+
+                <div class="input-box">
+                    <input type="text" id="Email_Address" name="Email_Address" placeholder="Enter Email Address" required>
+                    <div class="underline"></div>
+                </div>
+
+                <div class="label-box">
+                    <label>Phone Number<span style="color:red;">**</span></label>
+                </div>
+                <div class="input-box">
+                    <input type="text" id="Phone_No" name="Phone_No" placeholder="Enter Phone No" required>
+                    <div class="underline"></div>
+                </div>
+
+                <div class="label-box">
+                    <label>Are you a PNBIL Account Holder?<span style="color:red;">*</span></label>
+                </div>
+                <div class="radio-box">
+                    <input type="radio" id="r1" name="Account_holder" value="Yes" />Yes
+                    <input type="radio" id="r2" name="Account_holder" value="No" />No
+                </div>
+                <div class="html2pdf__page-break"></div>
+                <div class="label-box">
+                    <label>Preferred Branch<span style="color:red;">*</span></label>
+                </div>
+                <div class="input-box">
+                    <select class="form-control" id="Preferred_Branch" name="Preferred_Branch">
+                        <option value="Moorgate">Moorgate</option>
+                        <option value="Southall">Southall</option>
+                        <option value="Leicester">Leicester</option>
+                        <option value="Birmingham">Birmingham</option>
+                        <option value="Ilford">Ilford</option>
+                        <option value="Wembley">Wembley</option>
+                        <option value="Wolverhampton">Wolverhampton</option>
+                    </select>
+                </div>
+
+                <div class="label-box">
+                    <label>Type of Query<span style="color:red;">*</span></label>
+                </div>
+                <div class="input-box">
+                    <select class="form-control" id="Query_Type" name="Query_Type">
+                        <option value="Products & Services">Products & Services</option>
+                        <option value="General enquiries">General enquiries</option>
+                        <option value="Others">Others</option>
+
+                    </select>
+                </div>
+
+                <div class="label-box">
+                    <label>Your Message<span style="color:red;">*</span></label>
+                </div>
+                <div class="msg-box">
+                    <textarea id="Message" name="Message" rows="4" cols="50" class="textarea-field" onkeyup="charCount(this)"></textarea>
+                    <div style="margin-top:5px;"><label style="color:darkred;">Maximum 320 Characters (<span id="excessCount">0</span> in excess)</label></div>
+                </div>
+
+                <div class="check-box">
+                    <input type="checkbox" value="privacy_notice" />
+                    <label style="font-size:10px; color:gray;">By checking this box you confirm that you have read and agree to our <a href="#" style="color:red;">Privacy Notice</a> </label>
+                </div>
+                <div class="button-box button-container">
+
+                    <input type="submit" name="submit" value="Send">
+                    <input type="reset" name="reset" value="Cancel">
+                    <input type="button" value="Save" name="create" id="btnSavePdf" onclick='savepdf();' />
+                    @*<input type="button" value="Print" onclick="PrintDiv();"/>*@
+                </div>
+
+            </form>
+
+        }
+    </div>
+</div>            
+
+
+<address>
+    One Microsoft Way<br />
+    Redmond, WA 98052-6399<br />
+    <abbr title="Phone">P:</abbr>
+    425.555.0100
+</address>
+
+<address>
+    <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
+    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
+</address>
+
+
+
+<script type="text/javascript">
+    
+    function savepdf() {
+        //alert("Hello");
+        console.log("Hello");
+        var element = document.getElementById('element-to-print');
+        var opt = {
+            margin: 1,
+            filename: 'ContactDetails.pdf',
+            image: { type: 'jpeg', quality: 0.98 },
+            html2canvas: { scale: 1,useCORS: true},
+            jsPDF: { unit: 'in', format: 'a4', orientation: 'p'}
+        };
+        html2pdf(element,opt);
+    }
+        
+
+    @* Javascript code to display Count of excess character of Textarea *@
+    function charCount(textarea) {
+        var max = 320;
+        var length = textarea.value.length;
+        //alert(length);
+
+        excessChar = length - max;
+        $('#excessCount').text(excessChar);
+
+        //OR
+        //if (length > max) {
+        //    excessChar = length - max;
+        //    $('#excessCount').text(excessChar);
+        //}
+        //else {
+        //    $('#excessCount').text("0");
+        //}
+    }
+
+    //Script to take screenshot
+    // Use the html2canvas function to take a screenshot and append it to the output div
+    function screenshot() {
+        let div = document.getElementById('mymodal');
+
+        html2canvas(div).then(function (canvas) {
+            document.getElementById('output').appendChild(canvas);
+        });
+    }
+
+</script>
+
+
+
+@section Scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<script src="~/Scripts/jquery.validate-vsdoc.js"></script>
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+

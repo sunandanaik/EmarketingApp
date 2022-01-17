@@ -6,16 +6,28 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 
+
 namespace EmarketingApp
 {
     public class MvcApplication : System.Web.HttpApplication
     {
+        
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
+            //Application["office_name"] = "Remote Software Solutions Pvt. Ltd.";
+
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            
+        }
+        protected void Session_Start()
+        {
+            Session["office_name"] = "Remote Software Solutions Pvt. Ltd";
+            Session["Session_Start"] = $"Session_Start {DateTime.Now}";
+
+           
         }
     }
 }

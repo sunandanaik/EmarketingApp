@@ -1,5 +1,4 @@
-﻿@model EmarketingApp.Models.tbl_contactus
-@{
+﻿@{
     ViewBag.Title = "Contact";
 }
 
@@ -9,6 +8,7 @@
 <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.0.0-rc.5/dist/html2canvas.min.js"></script>
 <!-- Include locally otherwise -->
 <!-- <script src='html2canvas.js'></script> -->
+
 
 <h2 style="color: green; margin-top: 60px;">@ViewBag.Message</h2>
 
@@ -27,94 +27,95 @@
             <div class="modal-body">
                 <div class="contact-container">
 
-                    @using (Html.BeginForm("Contact", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    @using (Html.BeginForm("SubmitForm", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
                     {
                         @*<span style="color:green;">@ViewBag.Message</span>*@
-                        <form action="#">
+                    <form action="#">
 
-                            <div class="title">@ViewBag.Title</div>
+                        <div class="title">@ViewBag.Title</div>
 
-                            <div class="label-box">
-                                <label>Name<span style="color:red;">*</span></label>
-                            </div>
-                            <div class="input-box underline">
+                        <div class="label-box">
+                            <label>Name<span style="color:red;">*</span></label>
+                        </div>
+                        <div class="input-box underline">
 
-                                <input type="text" name="Contact_Name" placeholder="Enter Name here" required>
-                                <div class="underline"></div>
-                            </div>
+                            <input type="text" id="Contact_Name" name="Contact_Name" placeholder="Enter Name here" required>
+                            <div class="underline"></div>
+                        </div>
 
-                            <div class="label-box">
-                                <label>Email Address<span style="color:red;">**</span></label>
-                            </div>
+                        <div class="label-box">
+                            <label>Email Address<span style="color:red;">**</span></label>
+                        </div>
 
-                            <div class="input-box">
-                                <input type="text" name="Email_Address" placeholder="Enter Email Address" required>
-                                <div class="underline"></div>
-                            </div>
+                        <div class="input-box">
+                            <input type="text" id="Email_Address" name="Email_Address" placeholder="Enter Email Address" required>
+                            <div class="underline"></div>
+                        </div>
 
-                            <div class="label-box">
-                                <label>Phone Number<span style="color:red;">**</span></label>
-                            </div>
-                            <div class="input-box">
-                                <input type="text" name="Phone_No" placeholder="Enter Phone No" required>
-                                <div class="underline"></div>
-                            </div>
+                        <div class="label-box">
+                            <label>Phone Number<span style="color:red;">**</span></label>
+                        </div>
+                        <div class="input-box">
+                            <input type="text" id="Phone_No" name="Phone_No" placeholder="Enter Phone No" required>
+                            <div class="underline"></div>
+                        </div>
 
-                            <div class="label-box">
-                                <label>Are you a PNBIL Account Holder?<span style="color:red;">*</span></label>
-                            </div>
-                            <div class="radio-box">
-                                <input type="radio" id="r1" name="Account_holder" value="Yes" />Yes
-                                <input type="radio" id="r2" name="Account_holder" value="No" />No
-                            </div>
+                        <div class="label-box">
+                            <label>Are you a PNBIL Account Holder?<span style="color:red;">*</span></label>
+                        </div>
+                        <div class="radio-box">
+                            <input type="radio" id="r1" name="Account_holder" value="Yes" />Yes
+                            <input type="radio" id="r2" name="Account_holder" value="No" />No
+                        </div>
 
-                            <div class="label-box">
-                                <label>Preferred Branch<span style="color:red;">*</span></label>
-                            </div>
-                            <div class="input-box">
-                                <select class="form-control" id="branch" name="Preferred_Branch">
-                                    <option value="Moorgate">Moorgate</option>
-                                    <option value="Southall">Southall</option>
-                                    <option value="Leicester">Leicester</option>
-                                    <option value="Birmingham">Birmingham</option>
-                                    <option value="Ilford">Ilford</option>
-                                    <option value="Wembley">Wembley</option>
-                                    <option value="Wolverhampton">Wolverhampton</option>
-                                </select>
-                            </div>
+                        <div class="label-box">
+                            <label>Preferred Branch<span style="color:red;">*</span></label>
+                        </div>
+                        <div class="input-box">
+                            <select class="form-control" id="Preferred_Branch" name="Preferred_Branch">
+                                <option value="Moorgate">Moorgate</option>
+                                <option value="Southall">Southall</option>
+                                <option value="Leicester">Leicester</option>
+                                <option value="Birmingham">Birmingham</option>
+                                <option value="Ilford">Ilford</option>
+                                <option value="Wembley">Wembley</option>
+                                <option value="Wolverhampton">Wolverhampton</option>
+                            </select>
+                        </div>
 
-                            <div class="label-box">
-                                <label>Type of Query<span style="color:red;">*</span></label>
-                            </div>
-                            <div class="input-box">
-                                <select class="form-control" id="type_query" name="Query_Type">
-                                    <option value="Products & Services">Products & Services</option>
-                                    <option value="General enquiries">General enquiries</option>
-                                    <option value="Others">Others</option>
+                        <div class="label-box">
+                            <label>Type of Query<span style="color:red;">*</span></label>
+                        </div>
+                        <div class="input-box">
+                            <select class="form-control" id="Query_Type" name="Query_Type">
+                                <option value="Products & Services">Products & Services</option>
+                                <option value="General enquiries">General enquiries</option>
+                                <option value="Others">Others</option>
 
-                                </select>
-                            </div>
+                            </select>
+                        </div>
 
-                            <div class="label-box">
-                                <label>Your Message<span style="color:red;">*</span></label>
-                            </div>
-                            <div class="msg-box">
-                                <textarea id="Message" name="Message" rows="4" cols="50" class="textarea-field" onkeyup="charCount(this)"></textarea>
-                                <div style="margin-top:5px;"><label style="color:darkred;">Maximum 320 Characters (<span id="excessCount">0</span> in excess)</label></div>
-                            </div>
+                        <div class="label-box">
+                            <label>Your Message<span style="color:red;">*</span></label>
+                        </div>
+                        <div class="msg-box">
+                            <textarea id="Message" name="Message" rows="4" cols="50" class="textarea-field" onkeyup="charCount(this)"></textarea>
+                            <div style="margin-top:5px;"><label style="color:darkred;">Maximum 320 Characters (<span id="excessCount">0</span> in excess)</label></div>
+                        </div>
 
-                            <div class="check-box">
-                                <input type="checkbox" value="privacy_notice" />
-                                <label style="font-size:10px; color:gray;">By checking this box you confirm that you have read and agree to our <a href="#" style="color:red;">Privacy Notice</a> </label>
-                            </div>
-                            <div class="button-box button-container">
+                        <div class="check-box">
+                            <input type="checkbox" value="privacy_notice" />
+                            <label style="font-size:10px; color:gray;">By checking this box you confirm that you have read and agree to our <a href="#" style="color:red;">Privacy Notice</a> </label>
+                        </div>
+                        <div class="button-box button-container">
 
-                                <input type="submit" name="submit" value="Send">
-                                <input type="reset" name="reset" value="Cancel">
-                                <input type="button" name="save" value="Save Data" onclick='screenshot();'>
-
-                            </div>
-                        </form>
+                            <input type="submit" name="submit" value="Send">
+                            <input type="reset" name="reset" value="Cancel">
+                            <input type="button" name="save" value="Save Data" onclick='screenshot();'>
+                            
+                        </div>
+                        
+                    </form>
                         @*<div class="option">or Connect With Social Media</div>
                             <div class="twitter">
                                 <a href="#"><i class="fab fa-twitter"></i>Sign in With Twitter</a>
@@ -134,6 +135,7 @@
     </div>
 </div>
 <div id="output"></div>
+<input type="button" value="Create" name="create" id="btnSavePdf" />
 
 <address>
     One Microsoft Way<br />
@@ -148,9 +150,10 @@
 </address>
 
 
-@* Javascript code to display Count of excess character of Textarea*@
+
 <script type="text/javascript">
 
+    @* Javascript code to display Count of excess character of Textarea *@
     function charCount(textarea) {
         var max = 320;
         var length = textarea.value.length;
@@ -179,9 +182,8 @@
         });
     }
 
-    
-
 </script>
+
 
 
 @section Scripts{

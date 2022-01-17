@@ -5,3 +5,10 @@
 <h3>@ViewBag.Message</h3>
 
 <p>Use this area to provide additional information.</p>
+
+<h1 style="color:aquamarine;">@Session["office_name"]</h1>
+<p>@Session["Session_Start"]</p>
+<div class="col-sm-2">
+    <div class="btn btn-success">@Html.ActionLink("Save Pdf", "DetailCustomer", "Home") </div>
+
+</div>
