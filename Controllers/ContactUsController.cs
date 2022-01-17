@@ -29,7 +29,7 @@ namespace EmarketingApp.Controllers
             try
             {
                 MailMessage mail = new MailMessage();
-                mail.To.Add("sungitmca@gmail.com");//Where mail will be sent
+                mail.To.Add("youremail@gmail.com");//Where mail will be sent
                 mail.From = new MailAddress(Email_Address);//Email which you are getting from contact us page 
                 mail.Subject = Preferred_Branch + "/" + Query_Type + "/" + Contact_Name;
 
@@ -49,7 +49,7 @@ namespace EmarketingApp.Controllers
                 //smtp.Host = "smtp.gmail.com";
                 //smtp.Port = 587;
                 //smtp.UseDefaultCredentials = true;
-                //NetworkCredential nc = new NetworkCredential("sungitmca@gmail.com", "password");
+                //NetworkCredential nc = new NetworkCredential("youremail@gmail.com", "password");
 
                 //smtp.Credentials = nc;
                 // Smtp Email ID and Password For authentication
