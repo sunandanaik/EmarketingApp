@@ -32,5 +32,6 @@ namespace EmarketingApp.Models
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<tbl_contactus> tbl_contactus { get; set; }
         public virtual DbSet<FixedDeposit> FixedDeposits { get; set; }
+        public virtual DbSet<tbl_setting> tbl_setting { get; set; }
     }
 }

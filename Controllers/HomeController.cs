@@ -54,7 +54,7 @@ namespace EmarketingApp.Controllers
             try
             {
                 MailMessage mail = new MailMessage();
-                mail.To.Add("youremail@gmail.com");//Where mail will be sent
+                mail.To.Add("sungitmca@gmail.com");//Where mail will be sent
                 mail.From = new MailAddress(Email_Address);//Email which you are getting from contact us page 
                 mail.Subject = Preferred_Branch + "/" + Query_Type + "/" + Contact_Name;
                 
@@ -304,6 +304,55 @@ namespace EmarketingApp.Controllers
             }
             
             return Json(tenures,JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult GetIntPayOut(string ten)
+        {
+            List<SelectListItem> ipo = new List<SelectListItem>();
+            switch (ten)
+            {
+                case "0":
+                    ipo.Add(new SelectListItem { Text = "Select", Value = "0" });
+                    ipo.Add(new SelectListItem { Text = "Maturity Interest Payment", Value = "maturity_int_pay" });
+                    ipo.Add(new SelectListItem { Text = "Annual Interest Payment", Value = "annual_int_pay" });
+                    break;
+
+                case "3":
+                    ipo.Add(new SelectListItem { Text = "Select", Value = "0" });
+                    ipo.Add(new SelectListItem { Text = "Annual Interest Payment", Value = "annual_int_pay" });
+                    break;
+                case "6":
+                    ipo.Add(new SelectListItem { Text = "Select", Value = "0" });
+                    ipo.Add(new SelectListItem { Text = "Annual Interest Payment", Value = "annual_int_pay" });
+                    break;
+                case "12":
+                    ipo.Add(new SelectListItem { Text = "Select", Value = "0" });
+                    ipo.Add(new SelectListItem { Text = "Maturity Interest Payment", Value = "maturity_int_pay" });
+                    ipo.Add(new SelectListItem { Text = "Annual Interest Payment", Value = "annual_int_pay" });
+                    break;
+                case "24":
+                    ipo.Add(new SelectListItem { Text = "Select", Value = "0" });
+                    ipo.Add(new SelectListItem { Text = "Maturity Interest Payment", Value = "maturity_int_pay" });
+                    ipo.Add(new SelectListItem { Text = "Annual Interest Payment", Value = "annual_int_pay" });
+                    break;
+                case "36":
+                    ipo.Add(new SelectListItem { Text = "Select", Value = "0" });
+                    ipo.Add(new SelectListItem { Text = "Maturity Interest Payment", Value = "maturity_int_pay" });
+                    ipo.Add(new SelectListItem { Text = "Annual Interest Payment", Value = "annual_int_pay" });
+                    break;
+                case "48":
+                    ipo.Add(new SelectListItem { Text = "Select", Value = "0" });
+                    ipo.Add(new SelectListItem { Text = "Maturity Interest Payment", Value = "maturity_int_pay" });
+                    ipo.Add(new SelectListItem { Text = "Annual Interest Payment", Value = "annual_int_pay" });
+                    break;
+                case "60":
+                    ipo.Add(new SelectListItem { Text = "Select", Value = "0" });
+                    ipo.Add(new SelectListItem { Text = "Maturity Interest Payment", Value = "maturity_int_pay" });
+                    ipo.Add(new SelectListItem { Text = "Annual Interest Payment", Value = "annual_int_pay" });
+                    break;
+            }
+
+            return Json(ipo, JsonRequestBehavior.AllowGet);
         }
     }
 }

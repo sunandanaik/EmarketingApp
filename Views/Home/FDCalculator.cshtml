@@ -21,7 +21,7 @@
         <h2 class="fd">Type of Deposit<span style="color:red;">*</span></h2>
         @Html.DropDownList("deposit_type", ViewData["deposittypeslist"] as List<SelectListItem>, "--Choose Option--", new { @class = "dtype form-control", @name = "deposit_type" })
         <!--<select class="dtype form-control" id="deposit_type" name="deposit_type">
-        <option disabled="disabled" selected="selected">--Choose Option--</option>-->
+    <option disabled="disabled" selected="selected">--Choose Option--</option>-->
         @*<option>Fixed Rate Bond</option>
         <option>Fixed rate ISA</option>*@
         <!--</select>-->
@@ -29,31 +29,33 @@
         <h2 class="fd">Currency<span style="color:red;">*</span></h2>
         @Html.DropDownList("currency", new SelectList(string.Empty, "Value", "Text"), "--Choose Option--", new { @class = "currency form-control", @name = "currency" })
         <!--<select class="currency form-control" id="currency" name="currency">
-            <option disabled="disabled" selected="selected">--Choose Option--</option>-->
-            @*<option value="1">GBP</option>
-            <option value="2">USD</option>
-            <option value="3">EUR</option>*@
+        <option disabled="disabled" selected="selected">--Choose Option--</option>-->
+        @*<option value="1">GBP</option>
+        <option value="2">USD</option>
+        <option value="3">EUR</option>*@
         <!--</select>-->
 
         <h2 class="fd">Tenure<span style="color:red;">*</span></h2>
         @Html.DropDownList("tenure", new SelectList(string.Empty, "Value", "Text"), "--Choose Option--", new { @class = "tenure form-control", @name = "tenure" })
         <!--<select class="tenure form-control" id="tenure" name="tenure">
-            <option disabled="disabled" selected="selected">--Choose Option--</option>-->
-            @*<option value="3">3 months</option>
-            <option value="6">6 months</option>
-            <option value="12">1 year</option>
-            <option value="24">2 years</option>
-            <option value="36">3 years</option>
-            <option value="48">4 years</option>
-            <option value="60">5 years</option>*@
+        <option disabled="disabled" selected="selected">--Choose Option--</option>-->
+        @*<option value="3">3 months</option>
+        <option value="6">6 months</option>
+        <option value="12">1 year</option>
+        <option value="24">2 years</option>
+        <option value="36">3 years</option>
+        <option value="48">4 years</option>
+        <option value="60">5 years</option>*@
         <!--</select>-->
 
         <h2 class="fd">Interest Pay out<span style="color:red;">*</span></h2>
-        <select class="ipo form-control" id="int_pay_out" name="int_pay_out">
+        @Html.DropDownList("int_pay_out", new SelectList(string.Empty, "Value", "Text"), "--Choose Option--", new { @class = "ipo form-control", @name = "int_pay_out" })
+        
+        @*<select class="ipo form-control" id="int_pay_out" name="int_pay_out">
             <option disabled="disabled" selected="selected">--Choose Option--</option>
             <option value="maturity_int_pay">Maturity Interest Payment</option>
             <option value="annual_int_pay">Annual Interest Payment</option>
-        </select>
+        </select>*@
 
         <span id="outputcal">Maturity Value-</span>&#163;<span class="font-weight-bold" id="fdoutput">xxxxxx</span><br />
         <span id="rate">Rate -</span> <span class="font-weight-bold" id="roi">xx</span>%<br />
@@ -127,6 +129,32 @@
 
                     $.each(tenures, function (i, ten) {
                         $("#tenure").append('<option value="' + ten.Value + '">' + ten.Text + '</option>');
+                    });
+                },
+                error: function (ex) {
+                    alert('Failed to retrieve tenures.' + ex);
+                }
+            });
+            return false;
+        });
+        $("#tenure").change(function () {
+            $("#int_pay_out").empty();
+            var param3 = JSON.stringify({
+                ten: $("#tenure").val()
+            });
+            $.ajax({
+                type: 'POST',
+                url: '/Home/GetIntPayOut',
+                dataType: 'json',
+                contentType: "application/json; charset=utf-8",
+                data: param3,
+
+                success: function (ipo) {
+                    //alert("Hi" + tenures[1].Text.toString());
+                    console.log(ipo);
+
+                    $.each(ipo, function (i, intpo) {
+                        $("#int_pay_out").append('<option value="' + intpo.Value + '">' + intpo.Text + '</option>');
                     });
                 },
                 error: function (ex) {

@@ -21,13 +21,16 @@
     }
 </script>*@
 
-<h2 style="color: green; margin-top: 60px;">@ViewBag.Message</h2>
+<div class="container">
+    <h2 style="color: green; margin-top: 60px;">@ViewBag.Message</h2>
+</div>
+
 
 <div  id="element-to-print">
 
     <div class="contact-container">
 
-        @using (Html.BeginForm("SubmitForm", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        @using (Html.BeginForm("SubmitForm", "ContactUs", FormMethod.Post, new { enctype = "multipart/form-data" }))
         {
 
             <form action="#">
@@ -56,7 +59,7 @@
                     <label>Phone Number<span style="color:red;">**</span></label>
                 </div>
                 <div class="input-box">
-                    <input type="text" id="Phone_No" name="Phone_No" placeholder="Enter Phone No" required>
+                    <input type="number" id="Phone_No" name="Phone_No" placeholder="Enter Phone No" required>
                     <div class="underline"></div>
                 </div>
 
@@ -73,6 +76,7 @@
                 </div>
                 <div class="input-box">
                     <select class="form-control" id="Preferred_Branch" name="Preferred_Branch">
+                        <option>--Select--</option>
                         <option value="Moorgate">Moorgate</option>
                         <option value="Southall">Southall</option>
                         <option value="Leicester">Leicester</option>
@@ -88,6 +92,7 @@
                 </div>
                 <div class="input-box">
                     <select class="form-control" id="Query_Type" name="Query_Type">
+                        <option>--Select--</option>
                         <option value="Products & Services">Products & Services</option>
                         <option value="General enquiries">General enquiries</option>
                         <option value="Others">Others</option>
@@ -100,11 +105,12 @@
                 </div>
                 <div class="msg-box">
                     <textarea id="Message" name="Message" rows="4" cols="50" class="textarea-field" onkeyup="charCount(this)"></textarea>
-                    <div style="margin-top:5px;"><label style="color:darkred;">Maximum 320 Characters (<span id="excessCount">0</span> in excess)</label></div>
+                    @*<div style="margin-top:5px;"><label style="color:darkred;">Maximum 320 Characters <span id="showspan">(<span id="excessCount">0</span> in excess)</span></label></div>*@
+                    <div style="margin-top:5px;"><label style="color:darkred;">Maximum 320 Characters <span id="showspan"></span></label></div>
                 </div>
 
                 <div class="check-box">
-                    <input type="checkbox" value="privacy_notice" />
+                    <input type="checkbox" value="privacy_notice" required="required" />
                     <label style="font-size:10px; color:gray;">By checking this box you confirm that you have read and agree to our <a href="#" style="color:red;">Privacy Notice</a> </label>
                 </div>
                 <div class="button-box button-container">
@@ -158,10 +164,19 @@
         var max = 320;
         var length = textarea.value.length;
         //alert(length);
-
-        excessChar = length - max;
-        $('#excessCount').text(excessChar);
-
+        if (length > max)
+        {
+            //document.querySelector("#showspan").style.visibility = "hidden";
+            excessChar = length - max;
+            $("#showspan").text("(" + excessChar + " in excess)");
+        }
+        else {
+            $("#showspan").text("(0 in excess)");
+            //document.querySelector("#showspan").style.visibility = "visible";
+            //excessChar = length - max;
+            //$('#excessCount').text(excessChar);
+        }
+        
         //OR
         //if (length > max) {
         //    excessChar = length - max;
@@ -170,7 +185,7 @@
         //else {
         //    $('#excessCount').text("0");
         //}
-    }
+    } //end of charCount()
 
     //Script to take screenshot
     // Use the html2canvas function to take a screenshot and append it to the output div

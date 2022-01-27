@@ -47,9 +47,6 @@ namespace EmarketingApp.DbOperations
                 return null;
             }
         }
-        public void GetData()
-        {
-
-        }
+        
     }
 }

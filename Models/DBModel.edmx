@@ -9,7 +9,7 @@
           <Key>
             <PropertyRef Name="FixedDepositId" />
           </Key>
-          <Property Name="FixedDepositId" Type="int" Nullable="false" />
+          <Property Name="FixedDepositId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Currency" Type="int" Nullable="false" />
           <Property Name="Rate" Type="float" Nullable="false" />
           <Property Name="FromSlab" Type="float" Nullable="false" />
@@ -68,6 +68,14 @@
           <Property Name="pro_fk_cat" Type="int" />
           <Property Name="pro_fk_user" Type="int" />
         </EntityType>
+        <EntityType Name="tbl_setting">
+          <Key>
+            <PropertyRef Name="Key" />
+          </Key>
+          <Property Name="Key" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Value" Type="varchar" MaxLength="250" />
+          <Property Name="Type" Type="varchar" MaxLength="150" />
+        </EntityType>
         <EntityType Name="tbl_user">
           <Key>
             <PropertyRef Name="u_id" />
@@ -122,6 +130,7 @@
           <EntitySet Name="tbl_category" EntityType="Self.tbl_category" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_contactus" EntityType="Self.tbl_contactus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_product" EntityType="Self.tbl_product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_setting" EntityType="Self.tbl_setting" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_user" EntityType="Self.tbl_user" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__tbl_categ__cat_f__3A81B327" Association="Self.FK__tbl_categ__cat_f__3A81B327">
             <End Role="tbl_admin" EntitySet="tbl_admin" />
@@ -243,6 +252,7 @@
           <EntitySet Name="sysdiagrams" EntityType="dbemarketingModel.sysdiagram" />
           <EntitySet Name="tbl_contactus" EntityType="dbemarketingModel.tbl_contactus" />
           <EntitySet Name="FixedDeposits" EntityType="dbemarketingModel.FixedDeposit" />
+          <EntitySet Name="tbl_setting" EntityType="dbemarketingModel.tbl_setting" />
         </EntityContainer>
         <EntityType Name="sysdiagram">
           <Key>
@@ -276,6 +286,14 @@
           <Property Name="Rate" Type="Double" Nullable="false" />
           <Property Name="FromSlab" Type="Double" Nullable="false" />
           <Property Name="ToSlab" Type="Double" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_setting">
+          <Key>
+            <PropertyRef Name="Key" />
+          </Key>
+          <Property Name="Key" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Value" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Type" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -361,6 +379,15 @@
                 <ScalarProperty Name="Rate" ColumnName="Rate" />
                 <ScalarProperty Name="Currency" ColumnName="Currency" />
                 <ScalarProperty Name="FixedDepositId" ColumnName="FixedDepositId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_setting">
+            <EntityTypeMapping TypeName="dbemarketingModel.tbl_setting">
+              <MappingFragment StoreEntitySet="tbl_setting">
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="Key" ColumnName="Key" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
