@@ -1,0 +1,88 @@
+﻿$.validator.addMethod("mobile10d", function (value, element) {
+        return this.optional(element) || /^[0-9]{10}$/.test(value);
+    }, "Please enter a valid 10 digit Phone No.");
+    //$.validator.methods.email = function (value, element) {
+    //    return this.optional(element) || /[a-z]+@[a-z]+\.[a-z]+/.test(value);
+//}
+$.validator.addMethod("noSpace", function (value, element) {
+    return value == '' || value.trim().length!=0
+},"Spaces are not allowed");
+
+$("#frmContact").validate({
+    rules: {
+        Contact_Name: {
+            required: true,
+            noSpace: true
+        },
+        Email_Address: {
+            required: "#Phone_No:blank",
+            email: true,
+            noSpace: true
+        },
+        Phone_No: {
+            required: "#Email_Address:blank",
+            mobile10d: true
+        },
+        Account_holder: {
+            required: true
+        },
+        Preferred_Branch: {
+            required:true
+        },
+        Query_Type: {
+            required: true
+        },
+        Message: {
+            required: true,
+            minlength: 30,
+            noSpace: true
+        },
+        privacy_check: {
+            required: true
+        }
+
+    },
+    messages: {
+        Contact_Name: {
+            Contact_Name: "Name is required"
+        },
+        Email_Address: {
+            required: "Either Email ID or Phone No is required",
+            email: "Please enter valid Email ID"
+        },
+        Phone_No: {
+            required: "Either Email ID or Phone No is required",
+            mobile10d: true
+        },
+        Account_holder: {
+            required: "Please select an option"
+        },
+        Preferred_Branch: {
+            required: "Please select Preferred branch"
+        },
+        Query_Type: {
+            required: "Please select Type of Query"
+        },
+        Message: {
+            required: "Please enter message",
+            minlength: "Message should be atleast 30 characters"
+        },
+        privacy_check: {
+            required: "Please select Privacy checkbox"
+        }
+    },
+    errorPlacement: function (error, element) {
+        if (element.is(":radio")) {
+            error.appendTo(element.parents(".radio-box"));
+        }
+        else if (element.is(":checkbox")) {
+            error.appendTo(element.parents(".check-box"));
+        }
+        else {
+            error.insertAfter(element);
+        }
+    },
+    submitHandler: function (form) {
+        form.submit();
+    }
+});

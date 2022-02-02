@@ -11,11 +11,18 @@ namespace EmarketingApp.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class tbl_contactus
     {
         public int Contact_id { get; set; }
+
+        [Required(ErrorMessage ="Name is required")]
         public string Contact_Name { get; set; }
+
+        [Required(ErrorMessage ="Email ID is required")]
+        [DataType(DataType.EmailAddress,ErrorMessage ="Invalid Email Address")]
+        [EmailAddress(ErrorMessage ="Email Address is not Valid")]
         public string Email_Address { get; set; }
         public string Phone_No { get; set; }
         public string Account_holder { get; set; }

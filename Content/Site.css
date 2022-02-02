@@ -18,8 +18,11 @@ select,
 textarea {
     max-width: 290px;
 }
-    input[type="submit"] {
-        width: 100%;
-    }
+input[type="submit"] {
+    width: 100%;
+}
+.field-validation-error{
+    color:red;
+}
 
 

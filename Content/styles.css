@@ -140,6 +140,35 @@ body {
 ::selection {
     background: #ff80bf;
 }
+/*Start CSS for Form Validation*/
+.field-validation-error {
+    /*color: red;*/
+    color: #ff3860;
+    font-size: 10px;
+    font-weight: bold;
+    height: 13px;
+}
+.error {
+    color: #ff3860;
+    width: 100%;
+    margin-top: 2px;
+    padding-left: 10px;
+    font-size: 10px;
+}
+/*End CSS for Form Validation*/
+
+.input-box .success input{
+    border-color:#09c372;
+}
+.input-box .form-error input {
+    border-color: #ff3860;
+}
+.input-box .form-error, .radio-box .form-error, .msg-box .form-error, .check-box .form-error{
+    color: #ff3860;
+    font-size: 10px;
+    font-weight: bold;
+    height: 13px;
+}
 
 #contact-img {
     margin: auto;
@@ -196,8 +225,10 @@ body {
 .contact-container form .radio-box {
     width: 100%;
     height: 25px;
-    margin-top: 25px;
+    margin-top: 30px;
     position: relative;
+    accent-color:red;
+    
 }
 .contact-container form .check-box {
     width: 100%;
@@ -249,22 +280,24 @@ body {
     transform-origin: left;
 }
 
-.contact-container form .button-container {
-    width: 100%;
-    margin-top: 20px;
-}
+    .contact-container form .button-box {
+        width: 100%;
+        margin-top: 40px;
+        border-radius: 16px;
+    }
 
 
-.contact-container .button-box input[type="submit"] {
-    background: linear-gradient(to right, #99004d 0%, #ff0080 100%);
+.contact-container form .button-box input[type="submit"] {
+    /*background: linear-gradient(to right, #99004d 0%, #ff0080 100%);*/
+    background-color: #99004d;
     font-size: 17px;
     color: #fff;
     border-radius: 5px;
     cursor: pointer;
     transition: all 0.3s ease;
-    width:120px;
+    width: 120px;
 }
-.contact-container .button-box input[type="reset"] {
+.contact-container form .button-box input[type="reset"] {
     background: lightgrey;
     font-size: 17px;
     color: #fff;
@@ -273,20 +306,31 @@ body {
     transition: all 0.3s ease;
     width: 120px;
 }
-    .contact-container .button-box input[type="button"] {
-        background: linear-gradient(to right, #99004d 0%, #ff0080 100%);
-        font-size: 17px;
-        color: #fff;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        width: 120px;
-    }
+.contact-container form .button-box input[type="button"] {
+    /*background: linear-gradient(to right, #99004d 0%, #ff0080 100%);*/
+    background-color:#99004d;
+    font-size: 17px;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 120px;
+}
 
-    .contact-container .button-box input[type="submit"]:hover, input[type="reset"]:hover, input[type="button"]:hover {
-        letter-spacing: 1px;
-        background: linear-gradient(to left, #99004d 0%, #ff0080 100%);
-    }
+.contact-container form .button-box input[type="submit"]:hover{
+    letter-spacing: 0px;
+    /*background: linear-gradient(to left, #99004d 0%, #ff0080 100%);*/
+    background-color:#ffffff;
+    color: #99004d;
+    border-color:maroon;
+}
+.contact-container form .button-box input[type="button"]:hover {
+    letter-spacing: 0px;
+    /*background: linear-gradient(to left, #99004d 0%, #ff0080 100%);*/
+    background-color: #ffffff;
+    color: #99004d;
+    border-color: maroon;
+}
 
 .contact-container .option {
     font-size: 14px;
