@@ -79,8 +79,9 @@ namespace EmarketingApp.Controllers
                     smtp.EnableSsl = true; //if SSL certificate
                     smtp.Send(mail);
                     ViewBag.Message = "Thank you for contacting us. We are reviewing your request and we'll get in touch as soon as possible.";
+                    //OR
+                    TempData["SuccessMessage"]= "Thank you for contacting us. We are reviewing your request and we'll get in touch as soon as possible.";
 
-                
             }
             catch (Exception ex)
             {

@@ -14,125 +14,115 @@
 <!--Html2Pdf cdn-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
+<!--Success Dialog Start-->
+<div id="myModalSuccess"  class="modal fade text-width:30%;" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2></h2>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body alert alert-success" id="MyModalSuccessAlertBody">
 
+            </div>
+            <div class="modal-footer">
+                &nbsp;
+                <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Success Dialog End-->
 <div class="container">
     <h2 style="color: green; margin-top: 60px;margin-left:20px;">@ViewBag.Message</h2>
 </div>
 
 <div id="element-to-print">
 
-    <div class="contact-container">
+    @*<div class="contact-container">*@
 
         @*@using (Html.BeginForm("SubmitForm", "ContactUs", FormMethod.Post, new { enctype = "multipart/form-data", @id = "frmContact" }))
             {*@
 
         <form action="@Url.Action("SubmitForm", "ContactUs")" id="frmContact" method="post" enctype="multipart/form-data">
 
-            <div class="title">@ViewBag.Title</div>
+            
 
-            <div class="label-box">
-                <label>Name<span style="color:red;">*</span></label>
-            </div>
-            <div class="input-box underline">
+            <div class="wrapper">
+                <div class="contact-title">@ViewBag.Title</div>
+                <div class="form">
+                    <div class="inputfield">
+                        <label>Name<span style="color:red;">*</span></label>
+                        <input type="text" class="input" id="Contact_Name" name="Contact_Name" />
+                    </div>
+                    <div class="inputfield">
+                        <label>Email Address<span style="color:red;">**</span></label>
+                        <input type="text" class="input" id="Email_Address" name="Email_Address" />
+                    </div>
+                    <div class="inputfield">
+                        <label>Phone Number<span style="color:red;">**</span></label>
+                        <input type="text" class="input" id="Phone_No" name="Phone_No" />
+                    </div>
 
-                <input type="text" id="Contact_Name" name="Contact_Name" placeholder="Enter Name here" />
-                <div class="underline"></div>
-                @*@Html.ValidationMessage("Contact_Name")*@
-                @*<div class="form-error"></div>*@
-            </div>
+                    <div class="inputfield">
+                        <label>Are you a PNBIL Account Holder?<span style="color:red;">*</span></label>
+                        <div class="radio-select">
+                            <input type="radio" id="r1" name="Account_holder" value="Yes" />Yes
+                            <input type="radio" id="r2" name="Account_holder" value="No" />No
 
-            <div class="label-box">
-                <label>Email Address<span style="color:red;">**</span></label>
-            </div>
-
-            <div class="input-box">
-                <input type="text" id="Email_Address" name="Email_Address" placeholder="Enter Email Address" />
-                <div class="underline"></div>
-                @*@Html.ValidationMessage("Email_Address")*@
-                @*<div class="form-error"><strong></strong></div>*@
-            </div>
-
-            <div class="label-box">
-                <label>Phone Number<span style="color:red;">**</span></label>
-            </div>
-            <div class="input-box underline">
-                <input type="text" id="Phone_No" name="Phone_No" placeholder="Enter Phone No" />
-                <div class="underline"></div>
-                @*@Html.ValidationMessage("Phone_No")*@
-                @*<div class="form-error"><strong></strong></div>*@
-            </div>
-
-            <div class="label-box">
-                <label>Are you a PNBIL Account Holder?<span style="color:red;">*</span></label>
-            </div>
-            <div class="radio-box">
-                <input type="radio" id="r1" name="Account_holder" value="Yes" />Yes
-                <input type="radio" id="r2" name="Account_holder" value="No" />No
-                @*<div>@Html.ValidationMessage("Account_holder")</div>*@
-                @*<div id="radio-div" class="form-error"><strong></strong></div>*@
-            </div>
-            @*<div class="html2pdf__page-break"></div>*@
-            <div class="label-box">
-                <label>Preferred Branch<span style="color:red;">*</span></label>
-            </div>
-            <div class="input-box">
-                <select class="form-control" id="Preferred_Branch" name="Preferred_Branch">
-                    <option value="">--Select--</option>
-                    <option value="Central London">Central London</option>
-                    <option value="Southall">Southall</option>
-                    <option value="Leicester">Leicester</option>
-                    <option value="Birmingham">Birmingham</option>
-                    <option value="Ilford">Ilford</option>
-                    <option value="Wembley">Wembley</option>
-                    <option value="Wolverhampton">Wolverhampton</option>
-                </select>
-                @*@Html.ValidationMessage("Preferred_Branch")*@
-                @*<div class="form-error"><strong></strong></div>*@
-            </div>
-
-            <div class="label-box">
-                <label>Type of Query<span style="color:red;">*</span></label>
-            </div>
-            <div class="input-box">
-                <select class="form-control" id="Query_Type" name="Query_Type">
-                    <option value="">--Select--</option>
-                    <option value="Products & Services">Products & Services</option>
-                    <option value="General enquiries">General enquiries</option>
-                    <option value="Others">Others</option>
-                </select>
-                @*@Html.ValidationMessage("Query_Type")*@
-                @*<div class="form-error"><strong></strong></div>*@
+                        </div>
+                    </div>
+                    <div class="inputfield">
+                        <label>Preferred Branch<span style="color:red;">*</span></label>
+                        <div class="custom_select">
+                            <select  id="Preferred_Branch" name="Preferred_Branch">
+                                <option value="">--Select--</option>
+                                <option value="Central London">Central London</option>
+                                <option value="Southall">Southall</option>
+                                <option value="Leicester">Leicester</option>
+                                <option value="Birmingham">Birmingham</option>
+                                <option value="Ilford">Ilford</option>
+                                <option value="Wembley">Wembley</option>
+                                <option value="Wolverhampton">Wolverhampton</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="inputfield">
+                        <label>Type of Query<span style="color:red;">*</span></label>
+                        <div class="custom_select">
+                            <select  id="Query_Type" name="Query_Type">
+                                <option value="">--Select--</option>
+                                <option value="Products & Services">Products & Services</option>
+                                <option value="General enquiries">General enquiries</option>
+                                <option value="Others">Others</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="inputfield">
+                        <label>Your Message<span style="color:red;">*</span></label>
+                        <textarea rows="5" cols="30" class="textarea" id="Message" name="Message" onkeyup="charCount(this)"></textarea>
+                        <label style="color: darkred; ">Maximum 320 Characters (<span id="excessCount">0</span> in excess)</label>
+                    </div>
+                    
+                    <div class="inputfield terms" style="margin-top: 60px;">
+                        <label class="check">
+                            <input type="checkbox" value="privacy_notice" />
+                            <label style="font-size: 10px; color: gray; width: 100%; padding-left: 88px;">By checking this box you confirm that you have read and agree to our <a href="#" style="color:red;">Privacy Notice</a> </label>
+                            <span class="checkmark"></span>
+                        </label>
+                        
+                    </div>
+                    <div class="inputfield btn-container">
+                        <input type="submit" name="submit" value="Send" class="btn" id="btnSubmit"/>
+                        <input type="reset" name="reset" value="Cancel" class="btn" id="btnCancel"/>
+                        <input type="button" name="print" value="Print" class="btn" id="btnSavePdf"/>
+                    </div>
+                </div>
             </div>
 
-            <div class="label-box">
-                <label>Your Message<span style="color:red;">*</span></label>
-            </div>
-            <div class="msg-box">
-                <textarea id="Message" name="Message" rows="4" cols="50" class="textarea-field" onkeyup="charCount(this)"></textarea>
-                @*<div style="margin-top:5px;"><label style="color:darkred;">Maximum 320 Characters <span id="showspan">(<span id="excessCount">0</span> in excess)</span></label></div>*@
-                <div style="margin-top:5px;"><label style="color:darkred;">Maximum 320 Characters <span id="showspan"></span></label></div>
-                @*@Html.ValidationMessage("Message")*@
-                @*<div class="form-error"><strong></strong></div>*@
-            </div>
-
-            <div class="check-box">
-                <input type="checkbox" id="privacy_check" name="privacy_check" value="true"
-                       data-val="true" data-val-required="Please select the Privacy checkbox" />
-                <label style="font-size:10px; color:gray;">By checking this box you confirm that you have read and agree to our <a href="#" style="color: #99004d;">Privacy Notice</a> </label>
-                @*@Html.ValidationMessage("privacy_check", new { style = "display:block;margin-top:20px" })*@
-                @*<div class="form-error"><strong></strong></div>*@
-            </div>
-
-            <div class="button-box button-container">
-
-                <input type="submit" name="submit" value="Send" id="btnSend" />
-                <input type="reset" name="reset" value="Cancel" id="btnCancel" />
-                <input type="button" value="Save" name="create" id="btnSavePdf" />
-                @*<input type="button" value="Print" onclick="PrintDiv();"/>*@
-            </div>
         </form>
         @*}*@
-    </div>
+    @*</div>*@
 </div>
 
 <address>
@@ -154,7 +144,12 @@
             savepdf(); //function call
         });
 
+        var msg = "@TempData["SuccessMessage"]";
+        if (msg) {
+            openSuccessModal(msg);
+        }
     });
+
     //Function Definition:To Save Form in PDF format.
     function savepdf() {
         var element = document.getElementById('element-to-print');
@@ -195,6 +190,13 @@
         //    $('#excessCount').text("0");
         //}
     } //end of charCount()
+
+    //Function definition to open Success modal on submitting contact form.
+    function openSuccessModal(strMessage) {
+        var myDiv = document.getElementById("MyModalSuccessAlertBody");
+        myDiv.innerHTML = strMessage;
+        $("#myModalSuccess").modal('show');
+    }
 
 </script>
 

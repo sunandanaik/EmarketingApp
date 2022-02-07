@@ -1,9 +1,9 @@
 ﻿$.validator.addMethod("mobile10d", function (value, element) {
         return this.optional(element) || /^[0-9]{10}$/.test(value);
     }, "Please enter a valid 10 digit Phone No.");
-    //$.validator.methods.email = function (value, element) {
-    //    return this.optional(element) || /[a-z]+@[a-z]+\.[a-z]+/.test(value);
-//}
+    $.validator.addMethod("isemail",function (value, element) {
+        return this.optional(element) || /[a-z]+@[a-z]+\.[a-z]+/.test(value);
+},"Please enter Valid Email Address");
 $.validator.addMethod("noSpace", function (value, element) {
     return value == '' || value.trim().length!=0
 },"Spaces are not allowed");
@@ -17,7 +17,8 @@ $("#frmContact").validate({
         Email_Address: {
             required: "#Phone_No:blank",
             email: true,
-            noSpace: true
+            noSpace: true,
+			isemail:true
         },
         Phone_No: {
             required: "#Email_Address:blank",
@@ -44,7 +45,7 @@ $("#frmContact").validate({
     },
     messages: {
         Contact_Name: {
-            Contact_Name: "Name is required"
+            required: "Name is required"
         },
         Email_Address: {
             required: "Either Email ID or Phone No is required",
