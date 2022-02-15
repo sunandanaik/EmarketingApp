@@ -5,77 +5,87 @@
 
 <!-- Popper JS -->
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-<!-- Include from the CDN -->
-<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.0.0-rc.5/dist/html2canvas.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.debug.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.min.js"></script>
-<!-- Include locally otherwise -->
-<!-- <script src='html2canvas.js'></script> -->
-<!--Html2Pdf cdn-->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
 
-<!--Success Dialog Start-->
-<div id="myModalSuccess"  class="modal fade text-width:30%;" role="dialog">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2></h2>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-            <div class="modal-body alert alert-success" id="MyModalSuccessAlertBody">
+<!--Method-1 :Success Dialog Start-->
+@*<div id="myModalSuccess"  class="modal fade text-width:30%;" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2></h2>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body alert alert-success" id="MyModalSuccessAlertBody">
 
-            </div>
-            <div class="modal-footer">
-                &nbsp;
-                <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+                </div>
+                <div class="modal-footer">
+                    &nbsp;
+                    <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+                </div>
             </div>
         </div>
-    </div>
-</div>
+    </div>*@
 <!--Success Dialog End-->
-<div class="container">
+@*<div class="container">
     <h2 style="color: green; margin-top: 60px;margin-left:20px;">@ViewBag.Message</h2>
-</div>
+</div>*@
+<br />
+<br />
 
+<br />
 <div id="element-to-print">
 
-    @*<div class="contact-container">*@
+    @using (Ajax.BeginForm("SubmitForm", "ContactUs", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "element-to-print" }, new { enctype = "multipart/form-data", @id = "frmContact" }))
+    {
+        HtmlHelper.UnobtrusiveJavaScriptEnabled = false;
 
-        @*@using (Html.BeginForm("SubmitForm", "ContactUs", FormMethod.Post, new { enctype = "multipart/form-data", @id = "frmContact" }))
-            {*@
-
-        <form action="@Url.Action("SubmitForm", "ContactUs")" id="frmContact" method="post" enctype="multipart/form-data">
-
-            
-
+        @*<form action="@Url.Action("SubmitForm", "ContactUs")" id="frmContact" method="post" enctype="multipart/form-data">*@
+        <form>
             <div class="wrapper">
+                @*Method-2:*@
+                @*@if (TempData["SuccessMessage"] != null)
+                {
+                    <div class="alert alert-success" id="success-alert">
+                        <button type="button" class="close" data-dismiss="alert">x</button>
+                        <strong>Success !</strong>@TempData["SuccessMessage"]
+                    </div>
+                }*@
+                @*OR*@
+                @if (TempData["SuccessMessage"] != null)
+                {
+                    <script type="text/javascript">
+                    var msg = "@TempData["SuccessMessage"]";
+                    toastr.success(msg, "Success Alert", { timeOut: 3000 });
+                    </script>
+                }
+
                 <div class="contact-title">@ViewBag.Title</div>
                 <div class="form">
                     <div class="inputfield">
-                        <label>Name<span style="color:red;">*</span></label>
+                        <label class="lblname">Name<span style="color: #be023d;">*</span></label>
                         <input type="text" class="input" id="Contact_Name" name="Contact_Name" />
                     </div>
                     <div class="inputfield">
-                        <label>Email Address<span style="color:red;">**</span></label>
+                        <label class="lblemail">Email Address<span style="color: #be023d;">**</span></label>
                         <input type="text" class="input" id="Email_Address" name="Email_Address" />
                     </div>
                     <div class="inputfield">
-                        <label>Phone Number<span style="color:red;">**</span></label>
+                        <label class="lblphone">Phone Number<span style="color: #be023d;">**</span></label>
                         <input type="text" class="input" id="Phone_No" name="Phone_No" />
                     </div>
 
                     <div class="inputfield">
-                        <label>Are you a PNBIL Account Holder?<span style="color:red;">*</span></label>
-                        <div class="radio-select">
-                            <input type="radio" id="r1" name="Account_holder" value="Yes" />Yes
+                        <label>Are you a PNBIL Account Holder?<span style="color: #be023d;">*</span></label>
+                        <div class="radio-box">
+                            <input type="radio" id="r1" name="Account_holder" value="Yes" checked />Yes
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <input type="radio" id="r2" name="Account_holder" value="No" />No
-
                         </div>
                     </div>
                     <div class="inputfield">
-                        <label>Preferred Branch<span style="color:red;">*</span></label>
+                        <label>Preferred Branch<span style="color: #be023d;">*</span></label>
                         <div class="custom_select">
-                            <select  id="Preferred_Branch" name="Preferred_Branch">
+                            <select id="Preferred_Branch" name="Preferred_Branch">
                                 <option value="">--Select--</option>
                                 <option value="Central London">Central London</option>
                                 <option value="Southall">Southall</option>
@@ -88,9 +98,9 @@
                         </div>
                     </div>
                     <div class="inputfield">
-                        <label>Type of Query<span style="color:red;">*</span></label>
+                        <label>Type of Query<span style="color: #be023d;">*</span></label>
                         <div class="custom_select">
-                            <select  id="Query_Type" name="Query_Type">
+                            <select id="Query_Type" name="Query_Type">
                                 <option value="">--Select--</option>
                                 <option value="Products & Services">Products & Services</option>
                                 <option value="General enquiries">General enquiries</option>
@@ -99,72 +109,165 @@
                         </div>
                     </div>
                     <div class="inputfield">
-                        <label>Your Message<span style="color:red;">*</span></label>
-                        <textarea rows="5" cols="30" class="textarea" id="Message" name="Message" onkeyup="charCount(this)"></textarea>
-                        <label style="color: darkred; ">Maximum 320 Characters (<span id="excessCount">0</span> in excess)</label>
+                        <label class="lblmsg">Your Message<span style="color: #be023d;">*</span></label>
+                        <textarea id="Message" name="Message" wrap="soft" onkeyup="charCount(this)"></textarea>
                     </div>
-                    
-                    <div class="inputfield terms" style="margin-top: 60px;">
-                        <label class="check">
-                            <input type="checkbox" value="privacy_notice" />
-                            <label style="font-size: 10px; color: gray; width: 100%; padding-left: 88px;">By checking this box you confirm that you have read and agree to our <a href="#" style="color:red;">Privacy Notice</a> </label>
-                            <span class="checkmark"></span>
-                        </label>
-                        
+                    <div class="lbl-char">
+                        <label style="color: #be023d;">Maximum 320 Characters <span id="showspan"></span></label>
+                    </div>
+
+                    <div class="inputfield terms" style="margin-top: 30px;">
+                        @*<label class="check">*@
+                        <div class="check">
+                            <input type="checkbox" id="privacy_check" name="privacy_check" value="privacy_notice" style="accent-color:#be023d;" />
+                            By checking this box you confirm that you have read and agree to our
+                            <a href="#" style="color: #be023d; text-decoration:underline;"><strong>Privacy Notice</strong></a>
+                            <p style="color: #be023d;">*Remember to take a screenshot of this form as these details will not be emailed you.*</p>
+                        </div>
+
+
                     </div>
                     <div class="inputfield btn-container">
-                        <input type="submit" name="submit" value="Send" class="btn" id="btnSubmit"/>
-                        <input type="reset" name="reset" value="Cancel" class="btn" id="btnCancel"/>
-                        <input type="button" name="print" value="Print" class="btn" id="btnSavePdf"/>
+                        <input type="submit" name="send" value="Submit" class="btn noPrint" id="btnSubmit" />
+                        @*<input type="button" name="send" value="Submit" class="btn" id="btnSubmit" />*@
+                        @*<input type="reset" name="reset" value="Cancel" class="btn" id="btnCancel"/>*@
+                        <input type="button" name="print" value="Print" class="btn noPrint" id="btnSavePdf"
+                               onclick="window.myPrint('frmContact')" />
+                        <input type="button" onclick="printDiv('element-to-print')" class="btn" value="Print a div!" />
                     </div>
                 </div>
             </div>
 
         </form>
-        @*}*@
-    @*</div>*@
+    }
+
 </div>
 
-<address>
+<address class="noPrint">
     One Microsoft Way<br />
     Redmond, WA 98052-6399<br />
     <abbr title="Phone">P:</abbr>
     425.555.0100
 </address>
 
-<address>
+<address class="noPrint">
     <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
     <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
 </address>
 
 <script type="text/javascript">
-    $(document).ready(function () {
+    function printDiv(divName)
+    {
+        var printContents = document.getElementById(divName).innerHTML;
+        var originalContents = document.body.innerHTML;
+        document.body.innerHTML = printContents;
+        window.print();
+        document.body.innerHTML = originalContents;
+    }
+    //Ajax call Controller Action method on Submit form
+    //$("#btnSubmit").click(function () {
 
-        $("#btnSavePdf").click(function() {
-            savepdf(); //function call
-        });
+        //var Contact_Name = $("#Contact_Name").val();
+        //var Email_Address = $("#Email_Address").val();
+        //var Phone_No = $("#Phone_No").val();
+        //var Account_holder = $("#Account_holder").val();
+        //var Preferred_Branch = $("#Preferred_Branch").val();
+        //var Query_Type = $("#Query_Type").val();
+        //var Message = $("#Message").val();
 
-        var msg = "@TempData["SuccessMessage"]";
-        if (msg) {
-            openSuccessModal(msg);
-        }
-    });
+        //var objData = {
+        //    Contact_Name: Contact_Name,
+        //    Email_Address: Email_Address,
+        //    Phone_No: Phone_No,
+        //    Account_holder: Account_holder,
+        //    Preferred_Branch: Preferred_Branch,
+        //    Query_Type: Query_Type,
+        //    Message: Message
+        //};
+        //PostDataForm(objData);
+
+    //});
+    //function PostDataForm(objData) {
+    //    $.ajax({
+    //        async: true,
+    //        type: 'POST',
+    //        url: '/ContactUs/SubmitForm',
+    //        data: JSON.stringify(objData),
+    //        dataType:'json',
+    //        contentType:'application/json;charset=utf-8',
+    //        success: function (response) {
+    //            if (response.Success == true) {
+    //                toastr.success(response.message, "Success Alert",  { timeOut: 3000 });
+    //            }
+    //            else {
+    //                toastr.info(response.message, "Information Alert",  { timeOut: 3000 });
+    //            }
+    //        },
+    //        error: function () {
+    //            toastr.error("Something went Wrong. Please try again !", "Error Alert",  { timeOut: 3000,"closeButton":true });
+    //        }
+    //    });
+    //}
+
+    //Method-2: For Success Alert to Auto Close
+    //window.setTimeout(function () {
+    //    $(".alert").fadeTo(500, 0).slideUp(500, function () {
+    //        $(this).remove();
+    //    });
+    //}, 3000);
+
+    //$("#btnSavePdf").click(function() {
+    //    savepdf(); //function call
+    //});
+
+    //Method-1 :Function to call Success Modal
+    @*var msg = "@TempData["SuccessMessage"]";
+    if(msg) {
+        openSuccessModal(msg);
+    }*@
+
 
     //Function Definition:To Save Form in PDF format.
-    function savepdf() {
-        var element = document.getElementById('element-to-print');
-        var opt = {
-            margin: 1,
-            filename: $("#Contact_Name").val()+'_'+'ContactDetails.pdf',
-            image: { type: 'jpeg', quality: 0.98 },
-            html2canvas: { scale: 1,useCORS: true},
-            jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait'}
-        };
-        html2pdf(element,opt);
+    function myPrint(frmContact)
+    {
+        //alert("print");
+        var printdata = document.getElementById(frmContact);
+        var empt_cname = document.forms["frmContact"]["Contact_Name"].value;
+        var empt_cemail = document.forms["frmContact"]["Email_Address"].value;
+        var empt_cphone = document.forms["frmContact"]["Phone_No"].value;
+        var empt_cradio = document.forms["frmContact"]["r2"].value;
+        var empt_cbranch = document.forms["frmContact"]["Preferred_Branch"].value;
+        var empt_cquery = document.forms["frmContact"]["Query_Type"].value;
+        var empt_cmessage = document.forms["frmContact"]["Message"].value;
+        alert("Hi:"+ empt_cemail);
+        if(empt_cname == "" && empt_cemail == "") // && empt_cphone=="" && empt_cbranch.value == "" && empt_cquery.value == "" && empt_cmessage == "")
+        {
+            alert("Please fill the complete form");
+            return false;
+            //alert("Please fill the complete form");
+            //toastr.info("Please input a value !", "Information Alert", { timeOut: 3000, "closeButton": true });
+            //return false;
+        }
+        else {
+            window.print(printdata);
+        }
+
     }
+    //function savepdf() {
+    //    var element = document.getElementById('element-to-print');
+    //    var opt = {
+    //        margin: 1,
+    //        filename: $("#Contact_Name").val()+'_'+'ContactDetails.pdf',
+    //        image: { type: 'jpeg', quality: 0.98 },
+    //        html2canvas: { scale: 1,useCORS: true},
+    //        jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait'}
+    //    };
+    //    html2pdf(element,opt);
+    //}
 
     @* Javascript code to display Count of excess character of Textarea *@
-    function charCount(textarea) {
+    function charCount(textarea)
+    {
         var max = 320;
         var length = textarea.value.length;
         //alert(length);
@@ -191,12 +294,12 @@
         //}
     } //end of charCount()
 
-    //Function definition to open Success modal on submitting contact form.
-    function openSuccessModal(strMessage) {
-        var myDiv = document.getElementById("MyModalSuccessAlertBody");
-        myDiv.innerHTML = strMessage;
-        $("#myModalSuccess").modal('show');
-    }
+    //Method-1 :Function definition to open Success modal on submitting contact form.
+    //function openSuccessModal(strMessage) {
+    //    var myDiv = document.getElementById("MyModalSuccessAlertBody");
+    //    myDiv.innerHTML = strMessage;
+    //    $("#myModalSuccess").modal('show');
+    //}
 
 </script>
 
@@ -205,10 +308,10 @@
 }
 <!--OR-->
 @*<script src="~/Scripts/jquery.validate-vsdoc.js"></script>
-<script src="~/Scripts/jquery.validate.js"></script>
-<script src="~/Scripts/jquery.validate.min.js"></script>
-<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
-<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>*@
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>*@
 
 <!--Custom Validation Javascript-->
 <script defer src="~/Scripts/ContactUs.js"></script>

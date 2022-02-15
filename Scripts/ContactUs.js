@@ -1,9 +1,17 @@
-﻿$.validator.addMethod("mobile10d", function (value, element) {
-        return this.optional(element) || /^[0-9]{10}$/.test(value);
-    }, "Please enter a valid 10 digit Phone No.");
-    $.validator.addMethod("isemail",function (value, element) {
+﻿/*Regex Explanation
+
+(?=.*[0-9]) postive look ahead. Ensures that there is atleast one digit
+
+[- +()0 - 9]+ matches numbers, spaces, plus sign, hyphen and brackets
+*/
+$.validator.addMethod("mobile10d", function (value, element) {
+    return this.optional(element) || /^(?=.*[0-9])[- +()0-9]+$/.test(value);
+}, "Please enter a valid 10 digit Phone No."); //Example for Valid Phone No:+(91)123-456-7890
+
+$.validator.addMethod("isemail",function (value, element) {
         return this.optional(element) || /[a-z]+@[a-z]+\.[a-z]+/.test(value);
-},"Please enter Valid Email Address");
+}, "Please enter Valid Email Address");
+
 $.validator.addMethod("noSpace", function (value, element) {
     return value == '' || value.trim().length!=0
 },"Spaces are not allowed");
@@ -53,7 +61,7 @@ $("#frmContact").validate({
         },
         Phone_No: {
             required: "Either Email ID or Phone No is required",
-            mobile10d: true
+            mobile10d: "Please enter valid Phone No"
         },
         Account_holder: {
             required: "Please select an option"
@@ -77,7 +85,7 @@ $("#frmContact").validate({
             error.appendTo(element.parents(".radio-box"));
         }
         else if (element.is(":checkbox")) {
-            error.appendTo(element.parents(".check-box"));
+            error.appendTo(element.parents(".check"));
         }
         else {
             error.insertAfter(element);

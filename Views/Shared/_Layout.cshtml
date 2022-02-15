@@ -4,11 +4,15 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My EMarketing Website</title>
+
     @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/toastr")
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/toastr")
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" />
+
     <link href="~/Content/styles.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/ContactUs.css" rel="stylesheet" />
 </head>
@@ -70,10 +74,10 @@
             <p>&copy; @DateTime.Now.Year - Copyright by SunCoder.</p>
         </footer>
     </div>
-    
-    
-    @Scripts.Render("~/bundles/bootstrap")
 
+
+    @Scripts.Render("~/bundles/bootstrap")
+    
     
     <!--OR-->
     @RenderSection("Validation", required: false)

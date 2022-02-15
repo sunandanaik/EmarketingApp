@@ -141,9 +141,9 @@ body {
     background: #ff80bf;
 }
 /*Start CSS for Form Validation*/
-.field-validation-error {
+/*.field-validation-error {*/
     /*color: red;*/
-    color: #ff3860;
+    /*color: #ff3860;
     font-size: 10px;
     font-weight: bold;
     height: 13px;
@@ -154,10 +154,10 @@ body {
     margin-top: 2px;
     padding-left: 10px;
     font-size: 10px;
-}
+}*/
 /*End CSS for Form Validation*/
 
-.input-box .success input{
+/*.input-box .success input{
     border-color:#09c372;
 }
 .input-box .form-error input {
@@ -186,11 +186,11 @@ body {
     padding: 25px 30px;
     border-radius: 5px;
     box-shadow: 0 10px 10px rgba(0, 0, 0, 0.15);
-    margin: auto;
+    margin: auto;*/
     /* display:flex;
     align-items:center;
     justify-content:center;*/
-}
+/*}
 
 .contact-container form .title {
     font-size: 30px;
@@ -237,11 +237,11 @@ body {
     position: relative;
 }
 .contact-container form .msg-box {
-    margin-top: 25px;
+    margin-top: 25px;*/
         
     /*width: 310px;
     height: 79px;*/
-}
+/*}
 
 .contact-container form .input-box input {
     width: 100%;
@@ -287,9 +287,9 @@ body {
     }
 
 
-.contact-container form .button-box input[type="submit"] {
+.contact-container form .button-box input[type="submit"] {*/
     /*background: linear-gradient(to right, #99004d 0%, #ff0080 100%);*/
-    background-color: #99004d;
+    /*background-color: #99004d;
     font-size: 17px;
     color: #fff;
     border-radius: 5px;
@@ -306,9 +306,9 @@ body {
     transition: all 0.3s ease;
     width: 120px;
 }
-.contact-container form .button-box input[type="button"] {
+.contact-container form .button-box input[type="button"] {*/
     /*background: linear-gradient(to right, #99004d 0%, #ff0080 100%);*/
-    background-color:#99004d;
+    /*background-color:#99004d;
     font-size: 17px;
     color: #fff;
     border-radius: 5px;
@@ -318,16 +318,16 @@ body {
 }
 
 .contact-container form .button-box input[type="submit"]:hover{
-    letter-spacing: 0px;
+    letter-spacing: 0px;*/
     /*background: linear-gradient(to left, #99004d 0%, #ff0080 100%);*/
-    background-color:#ffffff;
+    /*background-color:#ffffff;
     color: #99004d;
     border-color:maroon;
 }
 .contact-container form .button-box input[type="button"]:hover {
-    letter-spacing: 0px;
+    letter-spacing: 0px;*/
     /*background: linear-gradient(to left, #99004d 0%, #ff0080 100%);*/
-    background-color: #ffffff;
+    /*background-color: #ffffff;
     color: #99004d;
     border-color: maroon;
 }
@@ -375,7 +375,7 @@ body {
 .contact-container .facebook a:hover {
     background: linear-gradient( to left, #3b5998 0%, #476bb8 100%);
     margin: 20px 0 50px 0;
-}
+}*/
 
 
 

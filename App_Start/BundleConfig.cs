@@ -27,6 +27,10 @@ namespace EmarketingApp
                       "~/Content/bootstrap.css",
                       "~/Content/Site.css",
                       "~/Content/bootstrap.min.css"));
+            bundles.Add(new StyleBundle("~/Content/toastr").Include(
+                       "~/Content/toastr.css"));
+            bundles.Add(new ScriptBundle("~/bundles/toastr").Include(
+                   "~/Scripts/toastr.min.js"));
         }
     }
 }
