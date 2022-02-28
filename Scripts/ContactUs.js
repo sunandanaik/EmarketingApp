@@ -5,8 +5,8 @@
 [- +()0 - 9]+ matches numbers, spaces, plus sign, hyphen and brackets
 */
 $.validator.addMethod("mobile10d", function (value, element) {
-    return this.optional(element) || /^(?=.*[0-9])[- +()0-9]+$/.test(value);
-}, "Please enter a valid 10 digit Phone No."); //Example for Valid Phone No:+(91)123-456-7890
+    return this.optional(element) || /^(?=.*[0-9])[\d- +()@#!$%&*<>?/''""~``,\={}[]|^.0-9[^a-z]]+$/.test(value);
+}, "Please enter a valid 10 digit Phone No."); //Example for Valid Phone No:+(91)123-456-7890, accepts all characters except letters.
 
 $.validator.addMethod("isemail",function (value, element) {
         return this.optional(element) || /[a-z]+@[a-z]+\.[a-z]+/.test(value);

@@ -54,8 +54,10 @@
                 @if (TempData["SuccessMessage"] != null)
                 {
                     <script type="text/javascript">
-                    var msg = "@TempData["SuccessMessage"]";
-                    toastr.success(msg, "Success Alert", { timeOut: 3000 });
+                        var msg = "@TempData["SuccessMessage"]";
+                        toastr.success(msg, "Success Alert", {
+                            timeOut: 3000, "positionClass": "toast-top-center", "preventDuplicates": true
+                        }).css("width", "700px");
                     </script>
                 }
 
@@ -133,7 +135,7 @@
                         @*<input type="reset" name="reset" value="Cancel" class="btn" id="btnCancel"/>*@
                         <input type="button" name="print" value="Print" class="btn noPrint" id="btnSavePdf"
                                onclick="window.myPrint('frmContact')" />
-                        <input type="button" onclick="printDiv('element-to-print')" class="btn" value="Print a div!" />
+                        <input type="button" onclick="printDiv('element-to-print')" class="btn noPrint" value="Print a div!" />
                     </div>
                 </div>
             </div>
@@ -234,19 +236,19 @@
         var printdata = document.getElementById(frmContact);
         var empt_cname = document.forms["frmContact"]["Contact_Name"].value;
         var empt_cemail = document.forms["frmContact"]["Email_Address"].value;
-        var empt_cphone = document.forms["frmContact"]["Phone_No"].value;
-        var empt_cradio = document.forms["frmContact"]["r2"].value;
-        var empt_cbranch = document.forms["frmContact"]["Preferred_Branch"].value;
-        var empt_cquery = document.forms["frmContact"]["Query_Type"].value;
+        //var empt_cphone = document.forms["frmContact"]["Phone_No"].value;
+        //var empt_cradio = document.forms["frmContact"]["r2"].value;
+        //var empt_cbranch = document.forms["frmContact"]["Preferred_Branch"].value;
+        //var empt_cquery = document.forms["frmContact"]["Query_Type"].value;
         var empt_cmessage = document.forms["frmContact"]["Message"].value;
-        alert("Hi:"+ empt_cemail);
-        if(empt_cname == "" && empt_cemail == "") // && empt_cphone=="" && empt_cbranch.value == "" && empt_cquery.value == "" && empt_cmessage == "")
+        
+        if (empt_cname == "" || empt_cmessage == "") // && empt_cphone=="" && empt_cbranch.value == "" && empt_cquery.value == "" && empt_cmessage == "")
         {
-            alert("Please fill the complete form");
-            return false;
             //alert("Please fill the complete form");
-            //toastr.info("Please input a value !", "Information Alert", { timeOut: 3000, "closeButton": true });
             //return false;
+            
+            toastr.info("Please fill the complete form !", "Information Alert", { timeOut: 3000, "closeButton": true });
+            return false;
         }
         else {
             window.print(printdata);
