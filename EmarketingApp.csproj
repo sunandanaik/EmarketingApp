@@ -179,6 +179,7 @@
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\FixedDepositModel.cs" />
+    <Compile Include="Models\ReCaptcha.cs" />
     <Compile Include="Models\sysdiagram.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>

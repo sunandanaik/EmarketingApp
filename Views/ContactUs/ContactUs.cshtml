@@ -1,7 +1,20 @@
-﻿
+﻿@model EmarketingApp.Models.ReCaptcha
 @{
     ViewBag.Title = "Contact";
 }
+@*<script>
+    function get_action(form) {
+        var v = grecaptcha.getResponse();
+        if (v.length == 0) {
+            document.getElementById('captcha').innerHTML = "You can't leave Captcha Code empty";
+            return false;
+        }
+        else {
+            document.getElementById('captcha').innerHTML = "Captcha completed";
+            return true;
+        }
+    }
+</script>*@
 
 <!-- Popper JS -->
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
@@ -27,8 +40,8 @@
     </div>*@
 <!--Success Dialog End-->
 @*<div class="container">
-    <h2 style="color: green; margin-top: 60px;margin-left:20px;">@ViewBag.Message</h2>
-</div>*@
+        <h2 style="color: green; margin-top: 60px;margin-left:20px;">@ViewBag.Message</h2>
+    </div>*@
 <br />
 <br />
 
@@ -44,12 +57,12 @@
             <div class="wrapper">
                 @*Method-2:*@
                 @*@if (TempData["SuccessMessage"] != null)
-                {
-                    <div class="alert alert-success" id="success-alert">
-                        <button type="button" class="close" data-dismiss="alert">x</button>
-                        <strong>Success !</strong>@TempData["SuccessMessage"]
-                    </div>
-                }*@
+                    {
+                        <div class="alert alert-success" id="success-alert">
+                            <button type="button" class="close" data-dismiss="alert">x</button>
+                            <strong>Success !</strong>@TempData["SuccessMessage"]
+                        </div>
+                    }*@
                 @*OR*@
                 @if (TempData["SuccessMessage"] != null)
                 {
@@ -126,11 +139,16 @@
                             <a href="#" style="color: #be023d; text-decoration:underline;"><strong>Privacy Notice</strong></a>
                             <p style="color: #be023d;">*Remember to take a screenshot of this form as these details will not be emailed you.*</p>
                         </div>
-
-
                     </div>
+
+                    <div id="dvCaptcha">
+                    </div>
+                    <input type="hidden" id="hfCaptcha" />
+                    <span id="rfvCaptcha" class="error" style="display:none;color:red;font-weight:bold;font-size:12px;">Captcha validation is required.</span>
+                    <br />
+
                     <div class="inputfield btn-container">
-                        <input type="submit" name="send" value="Submit" class="btn noPrint" id="btnSubmit" />
+                        <input type="submit" name="send" value="Submit" class="btn noPrint" id="btnSubmit"/>
                         @*<input type="button" name="send" value="Submit" class="btn" id="btnSubmit" />*@
                         @*<input type="reset" name="reset" value="Cancel" class="btn" id="btnCancel"/>*@
                         <input type="button" name="print" value="Print" class="btn noPrint" id="btnSavePdf"
@@ -156,6 +174,70 @@
     <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
     <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
 </address>
+
+<script type="text/javascript" src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" asyncdefer></script>
+<script type="text/javascript">
+        var onloadCallback = function () {
+            grecaptcha.render('dvCaptcha', {
+                'sitekey': '@Model.Key',
+                'callback': function(response) {
+                    $.ajax({
+                        type: "POST",
+                        url: "/ContactUs/AjaxMethod",
+                        data: "{response: '" + response + "'}",
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function (r) {
+                            var captchaResponse = jQuery.parseJSON(r.Response);
+                            if (captchaResponse.success) {
+                                $("#hfCaptcha").val(captchaResponse.success);
+                                $("#rfvCaptcha").hide();
+                            } else {
+                                $("#hfCaptcha").val("");
+                                $("#rfvCaptcha").show();
+                                var error = captchaResponse["error-codes"][0];
+                                $("#rfvCaptcha").html("RECaptcha error. " + error);
+                            }
+                        },
+                        error: function (err) {
+                            document.getElementById("rfvCaptcha").innerHTML = '<span style="display:none;color:red;font-weight:bold;font-size:12px;">Please verify you are not a robot.';
+                        }
+                    });
+                }
+            });
+        };
+        $(function () {
+            $("#btnSubmit").click(function () {
+                var response = grecaptcha.getResponse();
+                console.log(response.length);
+                if (response.length == 0) {
+                    document.getElementById("rfvCaptcha").innerHTML = '<span style="display:none;color:red;font-weight:bold;font-size:12px;">Please verify you are not a robot.';   
+                }
+                //debugger;
+                $("#rfvCaptcha").hide();
+                if($("#hfCaptcha").val() == "") {
+                    $("#rfvCaptcha").show();
+                }
+                //else if (response.length == 0) {
+                //    document.getElementById("rfvCaptcha").innerHTML = '<span style="display:none;color:red;font-weight:bold;font-size:12px;">Please verify you are not a robot.';
+                    
+                //}
+            });
+            return false;
+        });
+    //function verifyCaptcha() {
+    //    console.log('Verified!!!');
+    //    document.getElementById("rfvCaptcha").innerHTML = '';
+    //}
+    //$(document).on('click', '#btnSubmit', function () {
+    //    var response = grecaptcha.getResponse();
+    //    //alert(response);
+    //    if (response.length == 0) {
+    //        document.getElementById("rfvCaptcha").innerHTML = "Please verify you are not a robot.";
+    //        //return false;
+    //    }
+    //});
+</script>
 
 <script type="text/javascript">
     function printDiv(divName)
@@ -241,12 +323,12 @@
         //var empt_cbranch = document.forms["frmContact"]["Preferred_Branch"].value;
         //var empt_cquery = document.forms["frmContact"]["Query_Type"].value;
         var empt_cmessage = document.forms["frmContact"]["Message"].value;
-        
+
         if (empt_cname == "" || empt_cmessage == "") // && empt_cphone=="" && empt_cbranch.value == "" && empt_cquery.value == "" && empt_cmessage == "")
         {
             //alert("Please fill the complete form");
             //return false;
-            
+
             toastr.info("Please fill the complete form !", "Information Alert", { timeOut: 3000, "closeButton": true });
             return false;
         }
@@ -317,5 +399,6 @@
 
 <!--Custom Validation Javascript-->
 <script defer src="~/Scripts/ContactUs.js"></script>
+
 
 
